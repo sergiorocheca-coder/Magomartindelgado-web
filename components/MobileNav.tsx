@@ -69,7 +69,7 @@ export default function MobileNav({ open, onClose }: MobileNavProps) {
                 href="#contacto"
                 onClick={onClose}
                 className="inline-block text-[9px] tracking-[0.5em] uppercase font-sans font-light px-10 py-4 transition-all duration-500"
-                style={{ border: '1px solid oklch(76% 0.18 72 / 0.45)', color: 'oklch(76% 0.18 72)' }}
+                style={{ border: '1px solid oklch(76% 0.18 72 / 0.45)', color: 'oklch(76% 0.18 72)', borderRadius: '3px' }}
                 onMouseEnter={(e) => {
                   const el = e.currentTarget as HTMLElement
                   el.style.background = 'oklch(76% 0.18 72)'

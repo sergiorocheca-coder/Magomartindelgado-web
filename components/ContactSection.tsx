@@ -84,6 +84,7 @@ export default function ContactSection() {
               style={{
                 background: 'linear-gradient(135deg, oklch(76% 0.18 72) 0%, oklch(66% 0.20 52) 100%)',
                 color: 'oklch(6% 0.015 265)',
+                borderRadius: '3px',
               }}
               onMouseEnter={(e) => {
                 (e.currentTarget as HTMLElement).style.background =
@@ -105,6 +106,7 @@ export default function ContactSection() {
                   'linear-gradient(oklch(7% 0.018 265), oklch(7% 0.018 265)) padding-box, linear-gradient(135deg, oklch(76% 0.18 72), oklch(66% 0.20 52)) border-box',
                 border: '1px solid transparent',
                 color: 'oklch(76% 0.18 72)',
+                borderRadius: '3px',
               }}
               onMouseEnter={(e) => {
                 (e.currentTarget as HTMLElement).style.background =
@@ -119,6 +121,21 @@ export default function ContactSection() {
             </a>
           </div>
         </motion.div>
+      </div>
+
+      {/* Google Maps */}
+      <div className="mt-24 w-full overflow-hidden" style={{ height: '360px' }}>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3178.2000046108037!2d-3.6141040229303822!3d37.195478672137135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x67e122804d73a0eb%3A0xfd3f64376348989c!2sMago%20Mart%C3%ADn%20Delgado!5e0!3m2!1ses!2ses!4v1779218073815!5m2!1ses!2ses"
+          width="100%"
+          height="100%"
+          style={{ border: 0, filter: 'grayscale(80%) contrast(1.1)' }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          title="Mago Martín Delgado — Ubicación"
+          sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+        />
       </div>
     </section>
   )

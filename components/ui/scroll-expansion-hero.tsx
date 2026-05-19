@@ -127,6 +127,8 @@ export default function ScrollExpandMedia({
               className="absolute inset-0 w-full h-full"
               style={{ border: 'none', pointerEvents: 'none' }}
               allow="autoplay; fullscreen; encrypted-media"
+              sandbox="allow-scripts allow-same-origin allow-presentation"
+              title="Showreel"
             />
           ) : (
             <img
