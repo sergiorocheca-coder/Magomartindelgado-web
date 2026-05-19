@@ -10,7 +10,7 @@ const testimonials = [
   {
     name: 'Carmen López',
     event: 'Comunión — Granada',
-    text: 'Los niños (y los adultos) quedaron con la boca abierta. Martín tiene un don especial para conectar.',
+    text: 'Los niños (y los adultos) quedaron con la boca abierta. Martín tiene un don especial para conectar con la gente.',
   },
   {
     name: 'TechCorp Spain',
@@ -26,25 +26,54 @@ const testimonials = [
 
 export default function TestimonialsSection() {
   return (
-    <section className="py-32 bg-[#0c0b18] overflow-hidden">
-      <div className="text-center mb-16 px-6">
-        <p className="text-gold text-xs tracking-[0.3em] uppercase mb-4">Testimonios</p>
-        <h2 className="font-display text-5xl text-cream font-light">
+    <section
+      className="py-32 overflow-hidden"
+      style={{ background: 'oklch(7% 0.012 275)' }}
+    >
+      <div className="text-center mb-20 px-6">
+        <p className="text-gold text-[10px] tracking-[0.5em] uppercase mb-5 font-sans font-light">
+          Testimonios
+        </p>
+        <h2
+          className="font-display text-cream font-light"
+          style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}
+        >
           Lo que dicen <em className="text-gold">de Martín</em>
         </h2>
       </div>
+
       <div className="relative">
         <motion.div
           animate={{ x: [0, '-50%'] }}
-          transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-          className="flex gap-8 w-max"
+          transition={{ duration: 35, repeat: Infinity, ease: 'linear' }}
+          className="flex gap-6 w-max"
         >
           {[...testimonials, ...testimonials].map((t, i) => (
-            <div key={i} className="w-80 border border-gold/15 p-8 flex-shrink-0">
-              <p className="text-cream/70 text-sm leading-relaxed mb-6 italic">&ldquo;{t.text}&rdquo;</p>
-              <div className="border-t border-gold/20 pt-4">
-                <div className="text-cream font-medium text-sm">{t.name}</div>
-                <div className="text-gold/60 text-xs tracking-wider mt-1">{t.event}</div>
+            <div
+              key={i}
+              className="w-80 p-8 flex-shrink-0"
+              style={{ border: '1px solid oklch(68% 0.11 82 / 0.12)' }}
+            >
+              <div
+                className="font-display text-4xl font-light mb-6 leading-none"
+                style={{ color: 'oklch(68% 0.11 82 / 0.25)' }}
+              >
+                &ldquo;
+              </div>
+              <p
+                className="text-sm leading-relaxed mb-8 font-sans font-light italic tracking-wide"
+                style={{ color: 'oklch(95% 0.01 80 / 0.65)' }}
+              >
+                {t.text}
+              </p>
+              <div style={{ borderTop: '1px solid oklch(68% 0.11 82 / 0.2)' }} className="pt-5">
+                <div className="text-cream text-sm font-sans font-light tracking-wide">{t.name}</div>
+                <div
+                  className="text-[10px] tracking-[0.3em] uppercase mt-1 font-sans font-light"
+                  style={{ color: 'oklch(68% 0.11 82 / 0.55)' }}
+                >
+                  {t.event}
+                </div>
               </div>
             </div>
           ))}

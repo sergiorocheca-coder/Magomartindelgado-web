@@ -1,11 +1,11 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-bg: #080810;
-  --color-gold: #c9a227;
-  --color-gold-light: #e8c84a;
-  --color-cream: #f5f0e8;
-  --color-muted: #8a8095;
+  --color-bg: oklch(5% 0.012 275);
+  --color-gold: oklch(68% 0.11 82);
+  --color-gold-light: oklch(79% 0.13 82);
+  --color-cream: oklch(95% 0.01 80);
+  --color-muted: oklch(54% 0.02 290);
 }
 
 @theme inline {
@@ -18,23 +18,23 @@ html {
 }
 
 body {
-  background: #080810;
-  color: #f5f0e8;
+  background: oklch(5% 0.012 275);
+  color: oklch(95% 0.01 80);
 }
 
 ::selection {
-  background: rgba(201, 162, 39, 0.3);
+  background: oklch(68% 0.11 82 / 0.3);
 }
 
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 3px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #080810;
+  background: oklch(5% 0.012 275);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c9a227;
+  background: oklch(68% 0.11 82);
   border-radius: 2px;
 }

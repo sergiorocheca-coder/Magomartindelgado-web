@@ -16,28 +16,59 @@ export default function NavBar() {
 
   return (
     <motion.nav
-      className={`fixed top-0 left-0 right-0 z-50 px-6 py-4 flex items-center justify-between transition-all duration-500 ${
-        scrolled ? 'bg-bg/80 backdrop-blur-md border-b border-gold/10' : ''
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 px-8 py-5 flex items-center justify-between transition-all duration-700"
+      style={{
+        background: scrolled
+          ? 'oklch(5% 0.012 275 / 0.85)'
+          : 'transparent',
+        backdropFilter: scrolled ? 'blur(16px)' : 'none',
+        borderBottom: scrolled ? '1px solid oklch(68% 0.11 82 / 0.1)' : '1px solid transparent',
+      }}
     >
-      <span className="font-display text-xl text-gold tracking-widest uppercase">
+      <span
+        className="font-display text-gold tracking-[0.2em] uppercase font-light"
+        style={{ fontSize: 'clamp(0.85rem, 1.5vw, 1.1rem)' }}
+      >
         Martín Delgado
       </span>
-      <ul className="hidden md:flex gap-8">
+
+      <ul className="hidden md:flex gap-10">
         {links.map((l) => (
           <li key={l.href}>
             <a
               href={l.href}
-              className="text-sm tracking-widest uppercase text-cream/70 hover:text-gold transition-colors"
+              className="text-[10px] tracking-[0.35em] uppercase font-sans font-light transition-colors duration-300"
+              style={{ color: 'oklch(95% 0.01 80 / 0.55)' }}
+              onMouseEnter={(e) =>
+                ((e.target as HTMLElement).style.color = 'oklch(68% 0.11 82)')
+              }
+              onMouseLeave={(e) =>
+                ((e.target as HTMLElement).style.color = 'oklch(95% 0.01 80 / 0.55)')
+              }
             >
               {l.label}
             </a>
           </li>
         ))}
       </ul>
+
       <a
         href="#contacto"
-        className="border border-gold/60 text-gold text-xs tracking-widest uppercase px-5 py-2.5 hover:bg-gold hover:text-bg transition-all duration-300"
+        className="text-[10px] tracking-[0.35em] uppercase font-sans font-light px-6 py-3 transition-all duration-500"
+        style={{
+          border: '1px solid oklch(68% 0.11 82 / 0.5)',
+          color: 'oklch(68% 0.11 82)',
+        }}
+        onMouseEnter={(e) => {
+          const el = e.currentTarget
+          el.style.background = 'oklch(68% 0.11 82)'
+          el.style.color = 'oklch(5% 0.012 275)'
+        }}
+        onMouseLeave={(e) => {
+          const el = e.currentTarget
+          el.style.background = 'transparent'
+          el.style.color = 'oklch(68% 0.11 82)'
+        }}
       >
         Contratar
       </a>
