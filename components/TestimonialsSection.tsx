@@ -22,6 +22,16 @@ const testimonials = [
     event: 'Cumpleaños — Málaga',
     text: 'Una experiencia mágica de principio a fin. Profesional, cercano y con una magia que te deja sin palabras.',
   },
+  {
+    name: 'Isabel & Javier',
+    event: 'Aniversario — Madrid',
+    text: 'Nos dejó completamente sin palabras. Cada truco era más impresionante que el anterior. Noche inolvidable.',
+  },
+  {
+    name: 'Grupo Empresarial Norte',
+    event: 'Gala de empresa — Bilbao',
+    text: 'La actuación de Martín fue el momento estrella de la noche. Elegante, cercano y con una técnica impecable.',
+  },
 ]
 
 export default function TestimonialsSection() {
@@ -45,7 +55,7 @@ export default function TestimonialsSection() {
       <div className="relative">
         <motion.div
           animate={{ x: [0, '-50%'] }}
-          transition={{ duration: 35, repeat: Infinity, ease: 'linear' }}
+          transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
           className="flex gap-6 w-max"
         >
           {[...testimonials, ...testimonials].map((t, i) => (

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Cormorant_Garamond, Montserrat } from 'next/font/google'
 import SmoothScroll from '@/components/SmoothScroll'
+import CursorGlow from '@/components/CursorGlow'
 import './globals.css'
 
 const cormorant = Cormorant_Garamond({
@@ -30,6 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es" className={`${cormorant.variable} ${montserrat.variable}`}>
       <body>
+        <CursorGlow />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

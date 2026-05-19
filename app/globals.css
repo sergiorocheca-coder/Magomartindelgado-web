@@ -6,6 +6,7 @@
   --color-gold-light: oklch(79% 0.13 82);
   --color-cream: oklch(95% 0.01 80);
   --color-muted: oklch(54% 0.02 290);
+  --color-plum: oklch(22% 0.05 300);
 }
 
 @theme inline {

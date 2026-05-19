@@ -68,7 +68,7 @@ export default function HeroSection({ ready }: HeroSectionProps) {
           src="https://assets.cdn.filesafe.space/F222CaBt1UL1aluI2C1k/media/6a04af9d06993a27a31256e6.jpeg"
           alt=""
           className="w-full h-full object-cover"
-          style={{ opacity: 0.38 }}
+          style={{ opacity: 0.45 }}
         />
         {/* Gradient bottom fade */}
         <div

@@ -1,26 +1,28 @@
 'use client'
-import { useEffect, useRef } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import Lenis from 'lenis'
 
+const LenisContext = createContext<{ lenis: Lenis | null }>({ lenis: null })
+export const useLenis = () => useContext(LenisContext)
+
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
-  const lenisRef = useRef<Lenis | null>(null)
+  const [lenis, setLenis] = useState<Lenis | null>(null)
 
   useEffect(() => {
-    const lenis = new Lenis({
+    const instance = new Lenis({
       lerp: 0.1,
       wheelMultiplier: 0.85,
       touchMultiplier: 1.5,
       infinite: false,
     })
-    lenisRef.current = lenis
+    setLenis(instance)
 
     function raf(time: number) {
-      lenis.raf(time)
+      instance.raf(time)
       requestAnimationFrame(raf)
     }
     requestAnimationFrame(raf)
 
-    // Event delegation for anchor links — smooth scroll to section
     const handleClick = (e: MouseEvent) => {
       const anchor = (e.target as HTMLElement).closest('a[href^="#"]') as HTMLAnchorElement | null
       if (!anchor) return
@@ -29,7 +31,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       const target = document.querySelector(href)
       if (target) {
         e.preventDefault()
-        lenis.scrollTo(target as HTMLElement, {
+        instance.scrollTo(target as HTMLElement, {
           offset: -80,
           duration: 1.6,
           easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -40,9 +42,9 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
     return () => {
       document.removeEventListener('click', handleClick)
-      lenis.destroy()
+      instance.destroy()
     }
   }, [])
 
-  return <>{children}</>
+  return <LenisContext.Provider value={{ lenis }}>{children}</LenisContext.Provider>
 }

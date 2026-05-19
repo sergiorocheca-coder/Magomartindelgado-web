@@ -1,38 +1,81 @@
 'use client'
-import { useRef } from 'react'
-import { motion, useInView } from 'motion/react'
+import { useRef, useState, useEffect } from 'react'
+import { motion, useInView, AnimatePresence } from 'motion/react'
+
+const titles = ['bodas', 'comuniones', 'empresas', 'aniversarios', 'momentos únicos']
+
+function RotatingWord() {
+  const [index, setIndex] = useState(0)
+
+  useEffect(() => {
+    const timer = setInterval(() => setIndex((i) => (i + 1) % titles.length), 2500)
+    return () => clearInterval(timer)
+  }, [])
+
+  return (
+    <span
+      className="inline-block relative overflow-hidden"
+      style={{ height: '1.05em', verticalAlign: 'bottom' }}
+    >
+      <AnimatePresence mode="wait">
+        <motion.em
+          key={index}
+          className="text-gold italic block"
+          initial={{ y: '100%', opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: '-100%', opacity: 0 }}
+          transition={{ type: 'spring', stiffness: 50, damping: 14 }}
+        >
+          {titles[index]}
+        </motion.em>
+      </AnimatePresence>
+    </span>
+  )
+}
 
 export default function ContactSection() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="contacto" ref={ref} className="py-40 px-6">
-      <div className="max-w-2xl mx-auto text-center">
+    <section
+      id="contacto"
+      ref={ref}
+      className="py-40 px-6"
+      style={{ background: 'oklch(6% 0.015 275)' }}
+    >
+      <div className="max-w-3xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p className="text-gold text-[10px] tracking-[0.5em] uppercase mb-6 font-sans font-light">
+          <p
+            className="text-[9px] tracking-[0.6em] uppercase font-sans font-light mb-10"
+            style={{ color: 'oklch(68% 0.11 82)' }}
+          >
             Contacto
           </p>
+
           <h2
-            className="font-display text-cream font-light leading-[0.95] mb-8"
-            style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}
+            className="font-display font-light text-cream leading-[0.92] mb-16"
+            style={{ fontSize: 'clamp(3rem, 7vw, 6rem)', letterSpacing: '-0.02em' }}
           >
-            ¿Hablamos sobre
+            Creamos magia
             <br />
-            <em className="text-gold">tu evento?</em>
+            para <RotatingWord />
           </h2>
-          <div className="w-16 h-px mx-auto mb-10" style={{ background: 'oklch(68% 0.11 82 / 0.4)' }} />
+
+          <div className="w-12 h-px mx-auto mb-10" style={{ background: 'oklch(68% 0.11 82 / 0.35)' }} />
+
           <p
             className="leading-relaxed mb-16 max-w-sm mx-auto text-sm font-sans font-light tracking-wide"
-            style={{ color: 'oklch(95% 0.01 80 / 0.5)' }}
+            style={{ color: 'oklch(95% 0.01 80 / 0.45)' }}
           >
             Cuéntame qué tienes en mente. Te preparo una propuesta
             personalizada sin ningún compromiso.
           </p>
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="https://wa.me/34XXXXXXXXX"
@@ -50,17 +93,12 @@ export default function ContactSection() {
             <a
               href="mailto:martin@magomartindelgado.com"
               className="inline-flex items-center justify-center text-[10px] tracking-[0.4em] uppercase font-sans font-light px-12 py-5 transition-all duration-500"
-              style={{
-                border: '1px solid oklch(68% 0.11 82 / 0.5)',
-                color: 'oklch(68% 0.11 82)',
-              }}
+              style={{ border: '1px solid oklch(68% 0.11 82 / 0.45)', color: 'oklch(68% 0.11 82)' }}
               onMouseEnter={(e) => {
-                const el = e.currentTarget as HTMLElement
-                el.style.background = 'oklch(68% 0.11 82 / 0.08)'
+                (e.currentTarget as HTMLElement).style.background = 'oklch(68% 0.11 82 / 0.08)'
               }}
               onMouseLeave={(e) => {
-                const el = e.currentTarget as HTMLElement
-                el.style.background = 'transparent'
+                (e.currentTarget as HTMLElement).style.background = 'transparent'
               }}
             >
               Enviar email
