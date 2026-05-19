@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 import { motion } from 'motion/react'
 
 const testimonials = [
@@ -38,7 +38,7 @@ export default function TestimonialsSection() {
   return (
     <section
       className="py-32 overflow-hidden"
-      style={{ background: 'oklch(7% 0.012 275)' }}
+      style={{ background: 'oklch(8% 0.016 265)' }}
     >
       <div className="text-center mb-20 px-6">
         <p className="text-gold text-[10px] tracking-[0.5em] uppercase mb-5 font-sans font-light">
@@ -62,25 +62,25 @@ export default function TestimonialsSection() {
             <div
               key={i}
               className="w-80 p-8 flex-shrink-0"
-              style={{ border: '1px solid oklch(68% 0.11 82 / 0.12)' }}
+              style={{ border: '1px solid oklch(76% 0.18 72 / 0.12)' }}
             >
               <div
                 className="font-display text-4xl font-light mb-6 leading-none"
-                style={{ color: 'oklch(68% 0.11 82 / 0.25)' }}
+                style={{ color: 'oklch(76% 0.18 72 / 0.25)' }}
               >
                 &ldquo;
               </div>
               <p
                 className="text-sm leading-relaxed mb-8 font-sans font-light italic tracking-wide"
-                style={{ color: 'oklch(95% 0.01 80 / 0.65)' }}
+                style={{ color: 'oklch(97% 0.005 80 / 0.65)' }}
               >
                 {t.text}
               </p>
-              <div style={{ borderTop: '1px solid oklch(68% 0.11 82 / 0.2)' }} className="pt-5">
+              <div style={{ borderTop: '1px solid oklch(76% 0.18 72 / 0.2)' }} className="pt-5">
                 <div className="text-cream text-sm font-sans font-light tracking-wide">{t.name}</div>
                 <div
                   className="text-[10px] tracking-[0.3em] uppercase mt-1 font-sans font-light"
-                  style={{ color: 'oklch(68% 0.11 82 / 0.55)' }}
+                  style={{ color: 'oklch(76% 0.18 72 / 0.55)' }}
                 >
                   {t.event}
                 </div>
@@ -92,3 +92,4 @@ export default function TestimonialsSection() {
     </section>
   )
 }
+

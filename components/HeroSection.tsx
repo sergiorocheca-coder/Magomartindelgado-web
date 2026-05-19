@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'motion/react'
 
@@ -75,7 +75,7 @@ export default function HeroSection({ ready }: HeroSectionProps) {
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(to bottom, oklch(5% 0.012 275 / 0.55) 0%, oklch(5% 0.012 275 / 0.1) 40%, oklch(5% 0.012 275) 100%)',
+              'linear-gradient(to bottom, oklch(6% 0.015 265 / 0.55) 0%, oklch(6% 0.015 265 / 0.1) 40%, oklch(6% 0.015 265) 100%)',
           }}
         />
         {/* Radial vignette */}
@@ -83,7 +83,7 @@ export default function HeroSection({ ready }: HeroSectionProps) {
           className="absolute inset-0"
           style={{
             background:
-              'radial-gradient(ellipse 80% 80% at 50% 50%, transparent 30%, oklch(5% 0.012 275 / 0.65) 100%)',
+              'radial-gradient(ellipse 80% 80% at 50% 50%, transparent 30%, oklch(6% 0.015 265 / 0.65) 100%)',
           }}
         />
       </motion.div>
@@ -100,7 +100,7 @@ export default function HeroSection({ ready }: HeroSectionProps) {
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="w-px h-14 mx-auto mb-10"
           style={{
-            background: 'linear-gradient(to bottom, transparent, oklch(68% 0.11 82 / 0.7))',
+            background: 'linear-gradient(to bottom, transparent, oklch(76% 0.18 72 / 0.7))',
             transformOrigin: 'top',
           }}
         />
@@ -108,8 +108,8 @@ export default function HeroSection({ ready }: HeroSectionProps) {
         {/* Eyebrow */}
         <FadeIn delay={0.1} ready={ready} className="mb-10">
           <span
-            className="text-[9px] tracking-[0.7em] uppercase font-sans font-light"
-            style={{ color: 'oklch(68% 0.11 82 / 0.8)' }}
+            className="text-[10px] tracking-[0.55em] uppercase font-sans font-light"
+            style={{ color: 'oklch(76% 0.18 72)' }}
           >
             Magia profesional · España
           </span>
@@ -142,7 +142,7 @@ export default function HeroSection({ ready }: HeroSectionProps) {
           style={{
             height: '1px',
             width: '80px',
-            background: 'oklch(68% 0.11 82 / 0.4)',
+            background: 'oklch(76% 0.18 72 / 0.4)',
             transformOrigin: 'left',
           }}
         />
@@ -151,32 +151,28 @@ export default function HeroSection({ ready }: HeroSectionProps) {
         <FadeIn delay={0.65} ready={ready}>
           <p
             className="text-[10px] tracking-[0.45em] uppercase font-sans font-light"
-            style={{ color: 'oklch(95% 0.01 80 / 0.45)' }}
+            style={{ color: 'oklch(97% 0.005 80 / 0.65)' }}
           >
             Bodas · Comuniones · Eventos de empresa
           </p>
         </FadeIn>
 
-        {/* CTA */}
+        {/* CTA — gradient fill */}
         <FadeIn delay={0.8} ready={ready} className="mt-14">
           <a
             href="#contacto"
-            className="inline-block text-[10px] tracking-[0.45em] uppercase font-sans font-light px-14 py-5 transition-all duration-500"
+            className="inline-block text-[10px] tracking-[0.45em] uppercase font-sans font-semibold px-16 py-5 transition-all duration-500"
             style={{
-              border: '1px solid oklch(68% 0.11 82 / 0.45)',
-              color: 'oklch(68% 0.11 82)',
+              background: 'linear-gradient(135deg, oklch(76% 0.18 72) 0%, oklch(66% 0.20 52) 100%)',
+              color: 'oklch(6% 0.015 265)',
             }}
             onMouseEnter={(e) => {
-              const el = e.currentTarget
-              el.style.background = 'oklch(68% 0.11 82)'
-              el.style.color = 'oklch(5% 0.012 275)'
-              el.style.borderColor = 'oklch(68% 0.11 82)'
+              (e.currentTarget as HTMLElement).style.background =
+                'linear-gradient(135deg, oklch(84% 0.16 74) 0%, oklch(76% 0.18 72) 100%)'
             }}
             onMouseLeave={(e) => {
-              const el = e.currentTarget
-              el.style.background = 'transparent'
-              el.style.color = 'oklch(68% 0.11 82)'
-              el.style.borderColor = 'oklch(68% 0.11 82 / 0.45)'
+              (e.currentTarget as HTMLElement).style.background =
+                'linear-gradient(135deg, oklch(76% 0.18 72) 0%, oklch(66% 0.20 52) 100%)'
             }}
           >
             Solicitar presupuesto
@@ -193,7 +189,7 @@ export default function HeroSection({ ready }: HeroSectionProps) {
       >
         <span
           className="text-[9px] tracking-[0.5em] uppercase font-sans font-light"
-          style={{ color: 'oklch(68% 0.11 82 / 0.35)' }}
+          style={{ color: 'oklch(76% 0.18 72 / 0.35)' }}
         >
           Scroll
         </span>
@@ -201,9 +197,10 @@ export default function HeroSection({ ready }: HeroSectionProps) {
           animate={{ y: [0, 7, 0] }}
           transition={{ repeat: Infinity, duration: 2.2, ease: 'easeInOut' }}
           className="w-px h-10"
-          style={{ background: 'linear-gradient(to bottom, oklch(68% 0.11 82 / 0.5), transparent)' }}
+          style={{ background: 'linear-gradient(to bottom, oklch(76% 0.18 72 / 0.5), transparent)' }}
         />
       </motion.div>
     </section>
   )
 }
+

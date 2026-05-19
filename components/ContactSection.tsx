@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 import { useRef, useState, useEffect } from 'react'
 import { motion, useInView, AnimatePresence } from 'motion/react'
 
@@ -52,7 +52,7 @@ export default function ContactSection() {
         >
           <p
             className="text-[9px] tracking-[0.6em] uppercase font-sans font-light mb-10"
-            style={{ color: 'oklch(68% 0.11 82)' }}
+            style={{ color: 'oklch(76% 0.18 72)' }}
           >
             Contacto
           </p>
@@ -66,39 +66,53 @@ export default function ContactSection() {
             para <RotatingWord />
           </h2>
 
-          <div className="w-12 h-px mx-auto mb-10" style={{ background: 'oklch(68% 0.11 82 / 0.35)' }} />
+          <div className="w-12 h-px mx-auto mb-10" style={{ background: 'oklch(76% 0.18 72 / 0.35)' }} />
 
           <p
             className="leading-relaxed mb-16 max-w-sm mx-auto text-sm font-sans font-light tracking-wide"
-            style={{ color: 'oklch(95% 0.01 80 / 0.45)' }}
+            style={{ color: 'oklch(97% 0.005 80 / 0.45)' }}
           >
             Cuéntame qué tienes en mente. Te preparo una propuesta
             personalizada sin ningún compromiso.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            {/* Primary — gradient fill */}
             <a
               href="https://wa.me/34XXXXXXXXX"
-              className="inline-flex items-center justify-center text-[10px] tracking-[0.4em] uppercase font-sans font-semibold px-12 py-5 transition-all duration-500"
-              style={{ background: 'oklch(68% 0.11 82)', color: 'oklch(5% 0.012 275)' }}
-              onMouseEnter={(e) =>
-                ((e.currentTarget as HTMLElement).style.background = 'oklch(79% 0.13 82)')
-              }
-              onMouseLeave={(e) =>
-                ((e.currentTarget as HTMLElement).style.background = 'oklch(68% 0.11 82)')
-              }
+              className="inline-flex items-center justify-center text-[10px] tracking-[0.4em] uppercase font-sans font-semibold px-14 py-5 transition-all duration-500"
+              style={{
+                background: 'linear-gradient(135deg, oklch(76% 0.18 72) 0%, oklch(66% 0.20 52) 100%)',
+                color: 'oklch(6% 0.015 265)',
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.background =
+                  'linear-gradient(135deg, oklch(84% 0.16 74) 0%, oklch(76% 0.18 72) 100%)'
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.background =
+                  'linear-gradient(135deg, oklch(76% 0.18 72) 0%, oklch(66% 0.20 52) 100%)'
+              }}
             >
               WhatsApp
             </a>
+            {/* Secondary — gradient border */}
             <a
               href="mailto:martin@magomartindelgado.com"
-              className="inline-flex items-center justify-center text-[10px] tracking-[0.4em] uppercase font-sans font-light px-12 py-5 transition-all duration-500"
-              style={{ border: '1px solid oklch(68% 0.11 82 / 0.45)', color: 'oklch(68% 0.11 82)' }}
+              className="inline-flex items-center justify-center text-[10px] tracking-[0.4em] uppercase font-sans font-light px-14 py-5 transition-all duration-500"
+              style={{
+                background:
+                  'linear-gradient(oklch(7% 0.018 265), oklch(7% 0.018 265)) padding-box, linear-gradient(135deg, oklch(76% 0.18 72), oklch(66% 0.20 52)) border-box',
+                border: '1px solid transparent',
+                color: 'oklch(76% 0.18 72)',
+              }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.background = 'oklch(68% 0.11 82 / 0.08)'
+                (e.currentTarget as HTMLElement).style.background =
+                  'linear-gradient(oklch(10% 0.022 265), oklch(10% 0.022 265)) padding-box, linear-gradient(135deg, oklch(76% 0.18 72), oklch(66% 0.20 52)) border-box'
               }}
               onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.background = 'transparent'
+                (e.currentTarget as HTMLElement).style.background =
+                  'linear-gradient(oklch(7% 0.018 265), oklch(7% 0.018 265)) padding-box, linear-gradient(135deg, oklch(76% 0.18 72), oklch(66% 0.20 52)) border-box'
               }}
             >
               Enviar email
@@ -109,3 +123,4 @@ export default function ContactSection() {
     </section>
   )
 }
+

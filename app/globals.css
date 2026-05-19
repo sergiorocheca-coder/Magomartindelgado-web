@@ -1,11 +1,11 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-bg: oklch(5% 0.012 275);
-  --color-gold: oklch(68% 0.11 82);
-  --color-gold-light: oklch(79% 0.13 82);
-  --color-cream: oklch(95% 0.01 80);
-  --color-muted: oklch(54% 0.02 290);
+  --color-bg: oklch(6% 0.015 265);
+  --color-gold: oklch(76% 0.18 72);
+  --color-gold-light: oklch(84% 0.16 74);
+  --color-cream: oklch(97% 0.005 80);
+  --color-muted: oklch(62% 0.015 270);
   --color-plum: oklch(22% 0.05 300);
 }
 
@@ -19,12 +19,12 @@ html {
 }
 
 body {
-  background: oklch(5% 0.012 275);
-  color: oklch(95% 0.01 80);
+  background: oklch(6% 0.015 265);
+  color: oklch(97% 0.005 80);
 }
 
 ::selection {
-  background: oklch(68% 0.11 82 / 0.3);
+  background: oklch(76% 0.18 72 / 0.3);
 }
 
 ::-webkit-scrollbar {
@@ -32,10 +32,10 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: oklch(5% 0.012 275);
+  background: oklch(6% 0.015 265);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: oklch(68% 0.11 82);
+  background: oklch(76% 0.18 72);
   border-radius: 2px;
 }

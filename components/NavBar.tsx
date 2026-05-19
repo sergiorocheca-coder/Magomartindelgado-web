@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 import { useState } from 'react'
 import { motion, useScroll, useMotionValueEvent } from 'motion/react'
 import MobileNav from '@/components/MobileNav'
@@ -21,7 +21,7 @@ function Hamburger({ open, onClick }: { open: boolean; onClick: () => void }) {
         className="block h-px transition-all duration-400 origin-right"
         style={{
           width: open ? '100%' : '100%',
-          background: 'oklch(68% 0.11 82)',
+          background: 'oklch(76% 0.18 72)',
           transform: open ? 'rotate(-45deg) translateY(0.5px)' : 'none',
           transformOrigin: 'right center',
         }}
@@ -30,7 +30,7 @@ function Hamburger({ open, onClick }: { open: boolean; onClick: () => void }) {
         className="block h-px transition-all duration-400"
         style={{
           width: open ? '0%' : '70%',
-          background: 'oklch(68% 0.11 82)',
+          background: 'oklch(76% 0.18 72)',
           opacity: open ? 0 : 1,
         }}
       />
@@ -38,7 +38,7 @@ function Hamburger({ open, onClick }: { open: boolean; onClick: () => void }) {
         className="block h-px transition-all duration-400 origin-right"
         style={{
           width: open ? '100%' : '45%',
-          background: 'oklch(68% 0.11 82)',
+          background: 'oklch(76% 0.18 72)',
           transform: open ? 'rotate(45deg) translateY(-0.5px)' : 'none',
           transformOrigin: 'right center',
         }}
@@ -58,24 +58,24 @@ export default function NavBar() {
       <motion.nav
         className="fixed top-0 left-0 right-0 z-50 px-8 py-5 flex items-center justify-between transition-all duration-700"
         style={{
-          background: scrolled ? 'oklch(5% 0.012 275 / 0.85)' : 'transparent',
+          background: scrolled ? 'oklch(6% 0.015 265 / 0.85)' : 'transparent',
           backdropFilter: scrolled ? 'blur(16px)' : 'none',
-          borderBottom: scrolled ? '1px solid oklch(68% 0.11 82 / 0.1)' : '1px solid transparent',
+          borderBottom: scrolled ? '1px solid oklch(76% 0.18 72 / 0.1)' : '1px solid transparent',
         }}
       >
-        {/* Brand — "MD" monogram + name */}
-        <a href="#" className="flex items-center gap-3 group">
+        {/* Brand wordmark */}
+        <a href="#" className="group flex flex-col gap-[3px]">
           <span
-            className="font-display font-light tracking-[0.12em]"
-            style={{ fontSize: '1.4rem', color: 'oklch(68% 0.11 82)', lineHeight: 1 }}
-          >
-            MD
-          </span>
-          <span
-            className="hidden sm:block font-display text-cream tracking-[0.18em] uppercase font-light transition-colors duration-300 group-hover:text-gold"
-            style={{ fontSize: 'clamp(0.75rem, 1.2vw, 0.95rem)' }}
+            className="font-display font-light tracking-[0.22em] uppercase text-cream transition-colors duration-300 group-hover:text-gold"
+            style={{ fontSize: 'clamp(0.85rem, 1.3vw, 1.05rem)', lineHeight: 1 }}
           >
             Martín Delgado
+          </span>
+          <span
+            className="font-sans font-light tracking-[0.55em] uppercase"
+            style={{ fontSize: '0.48rem', color: 'oklch(76% 0.18 72)', lineHeight: 1 }}
+          >
+            Mago profesional
           </span>
         </a>
 
@@ -86,12 +86,12 @@ export default function NavBar() {
               <a
                 href={l.href}
                 className="text-[10px] tracking-[0.35em] uppercase font-sans font-light transition-colors duration-300"
-                style={{ color: 'oklch(95% 0.01 80 / 0.55)' }}
+                style={{ color: 'oklch(97% 0.005 80 / 0.55)' }}
                 onMouseEnter={(e) =>
-                  ((e.target as HTMLElement).style.color = 'oklch(68% 0.11 82)')
+                  ((e.target as HTMLElement).style.color = 'oklch(76% 0.18 72)')
                 }
                 onMouseLeave={(e) =>
-                  ((e.target as HTMLElement).style.color = 'oklch(95% 0.01 80 / 0.55)')
+                  ((e.target as HTMLElement).style.color = 'oklch(97% 0.005 80 / 0.55)')
                 }
               >
                 {l.label}
@@ -105,16 +105,16 @@ export default function NavBar() {
           <a
             href="#contacto"
             className="hidden md:inline-block text-[10px] tracking-[0.35em] uppercase font-sans font-light px-6 py-3 transition-all duration-500"
-            style={{ border: '1px solid oklch(68% 0.11 82 / 0.5)', color: 'oklch(68% 0.11 82)' }}
+            style={{ border: '1px solid oklch(76% 0.18 72 / 0.5)', color: 'oklch(76% 0.18 72)' }}
             onMouseEnter={(e) => {
               const el = e.currentTarget
-              el.style.background = 'oklch(68% 0.11 82)'
-              el.style.color = 'oklch(5% 0.012 275)'
+              el.style.background = 'oklch(76% 0.18 72)'
+              el.style.color = 'oklch(6% 0.015 265)'
             }}
             onMouseLeave={(e) => {
               const el = e.currentTarget
               el.style.background = 'transparent'
-              el.style.color = 'oklch(68% 0.11 82)'
+              el.style.color = 'oklch(76% 0.18 72)'
             }}
           >
             Contratar
@@ -127,3 +127,4 @@ export default function NavBar() {
     </>
   )
 }
+

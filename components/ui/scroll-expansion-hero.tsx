@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 import { useRef, useEffect, useState, ReactNode } from 'react'
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react'
 import { useLenis } from '@/components/SmoothScroll'
@@ -77,7 +77,7 @@ export default function ScrollExpandMedia({
     <div ref={containerRef} className="relative" style={{ height: '300vh' }}>
       {/* Sticky container */}
       <div className="sticky top-0 h-screen overflow-hidden flex items-center justify-center"
-        style={{ background: 'oklch(5% 0.012 275)' }}>
+        style={{ background: 'oklch(6% 0.015 265)' }}>
 
         {/* Background image — blurred, fades out */}
         <motion.div
@@ -106,7 +106,7 @@ export default function ScrollExpandMedia({
               className="font-display font-light text-cream leading-[0.9]"
               style={{ fontSize: 'clamp(3rem, 8vw, 7rem)', letterSpacing: '-0.02em' }}
             >
-              <span style={{ color: 'oklch(68% 0.11 82)' }}>{firstWord}</span>
+              <span style={{ color: 'oklch(76% 0.18 72)' }}>{firstWord}</span>
               {restOfTitle && <><br />{restOfTitle}</>}
             </h2>
           </motion.div>
@@ -123,10 +123,10 @@ export default function ScrollExpandMedia({
         >
           {mediaType === 'video' ? (
             <iframe
-              src={`${mediaSrc}?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&playsinline=1`}
+              src={mediaSrc}
               className="absolute inset-0 w-full h-full"
               style={{ border: 'none', pointerEvents: 'none' }}
-              allow="autoplay; fullscreen"
+              allow="autoplay; fullscreen; encrypted-media"
             />
           ) : (
             <img
@@ -140,7 +140,7 @@ export default function ScrollExpandMedia({
           <div
             className="absolute inset-0"
             style={{
-              background: 'linear-gradient(to bottom, transparent 50%, oklch(5% 0.012 275 / 0.7) 100%)',
+              background: 'linear-gradient(to bottom, transparent 50%, oklch(6% 0.015 265 / 0.7) 100%)',
             }}
           />
         </motion.div>
@@ -152,7 +152,7 @@ export default function ScrollExpandMedia({
         >
           <span
             className="text-[9px] tracking-[0.5em] uppercase font-sans font-light"
-            style={{ color: 'oklch(68% 0.11 82 / 0.6)' }}
+            style={{ color: 'oklch(76% 0.18 72 / 0.6)' }}
           >
             {scrollToExpand}
           </span>
@@ -160,7 +160,7 @@ export default function ScrollExpandMedia({
             animate={{ y: [0, 7, 0] }}
             transition={{ repeat: Infinity, duration: 2.2, ease: 'easeInOut' }}
             className="w-px h-8"
-            style={{ background: 'linear-gradient(to bottom, oklch(68% 0.11 82 / 0.5), transparent)' }}
+            style={{ background: 'linear-gradient(to bottom, oklch(76% 0.18 72 / 0.5), transparent)' }}
           />
         </motion.div>
 
@@ -177,3 +177,4 @@ export default function ScrollExpandMedia({
     </div>
   )
 }
+

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 import { motion, AnimatePresence } from 'motion/react'
 
 const links = [
@@ -25,7 +25,7 @@ export default function MobileNav({ open, onClose }: MobileNavProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            style={{ background: 'oklch(5% 0.012 275 / 0.6)', backdropFilter: 'blur(4px)' }}
+            style={{ background: 'oklch(6% 0.015 265 / 0.6)', backdropFilter: 'blur(4px)' }}
             onClick={onClose}
           />
 
@@ -34,9 +34,9 @@ export default function MobileNav({ open, onClose }: MobileNavProps) {
             className="fixed top-0 right-0 bottom-0 z-50 flex flex-col justify-center px-12"
             style={{
               width: 'min(320px, 85vw)',
-              background: 'oklch(7% 0.012 275 / 0.97)',
+              background: 'oklch(8% 0.016 265 / 0.97)',
               backdropFilter: 'blur(24px)',
-              borderLeft: '1px solid oklch(68% 0.11 82 / 0.08)',
+              borderLeft: '1px solid oklch(76% 0.18 72 / 0.08)',
             }}
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
@@ -69,16 +69,16 @@ export default function MobileNav({ open, onClose }: MobileNavProps) {
                 href="#contacto"
                 onClick={onClose}
                 className="inline-block text-[9px] tracking-[0.5em] uppercase font-sans font-light px-10 py-4 transition-all duration-500"
-                style={{ border: '1px solid oklch(68% 0.11 82 / 0.45)', color: 'oklch(68% 0.11 82)' }}
+                style={{ border: '1px solid oklch(76% 0.18 72 / 0.45)', color: 'oklch(76% 0.18 72)' }}
                 onMouseEnter={(e) => {
                   const el = e.currentTarget as HTMLElement
-                  el.style.background = 'oklch(68% 0.11 82)'
-                  el.style.color = 'oklch(5% 0.012 275)'
+                  el.style.background = 'oklch(76% 0.18 72)'
+                  el.style.color = 'oklch(6% 0.015 265)'
                 }}
                 onMouseLeave={(e) => {
                   const el = e.currentTarget as HTMLElement
                   el.style.background = 'transparent'
-                  el.style.color = 'oklch(68% 0.11 82)'
+                  el.style.color = 'oklch(76% 0.18 72)'
                 }}
               >
                 Contratar
@@ -90,3 +90,4 @@ export default function MobileNav({ open, onClose }: MobileNavProps) {
     </AnimatePresence>
   )
 }
+
