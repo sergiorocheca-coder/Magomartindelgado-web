@@ -79,7 +79,7 @@ export default function ContactSection() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             {/* Primary — gradient fill */}
             <a
-              href="https://wa.me/34XXXXXXXXX"
+              href="https://wa.me/34648146024"
               className="inline-flex items-center justify-center text-[10px] tracking-[0.4em] uppercase font-sans font-semibold px-14 py-5 transition-all duration-500"
               style={{
                 background: 'linear-gradient(135deg, oklch(76% 0.18 72) 0%, oklch(66% 0.20 52) 100%)',
@@ -98,7 +98,7 @@ export default function ContactSection() {
             </a>
             {/* Secondary — gradient border */}
             <a
-              href="mailto:martin@magomartindelgado.com"
+              href="mailto:martindelgadosalud@gmail.com"
               className="inline-flex items-center justify-center text-[10px] tracking-[0.4em] uppercase font-sans font-light px-14 py-5 transition-all duration-500"
               style={{
                 background:
