@@ -2,100 +2,207 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'motion/react'
 
-export default function HeroSection() {
+// Word reveal with overflow clip — Figure & Plot pattern
+function Word({
+  children,
+  delay,
+  ready,
+}: {
+  children: React.ReactNode
+  delay: number
+  ready: boolean
+}) {
+  return (
+    <span style={{ display: 'inline-block', overflow: 'hidden', verticalAlign: 'bottom' }}>
+      <motion.span
+        style={{ display: 'inline-block' }}
+        initial={{ y: '110%', opacity: 0 }}
+        animate={ready ? { y: 0, opacity: 1 } : {}}
+        transition={{ duration: 1.1, delay, ease: [0.16, 1, 0.3, 1] }}
+      >
+        {children}
+      </motion.span>
+    </span>
+  )
+}
+
+function FadeIn({
+  children,
+  delay,
+  ready,
+  className,
+}: {
+  children: React.ReactNode
+  delay: number
+  ready: boolean
+  className?: string
+}) {
+  return (
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, y: 16 }}
+      animate={ready ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 1, delay, ease: [0.16, 1, 0.3, 1] }}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
+interface HeroSectionProps {
+  ready: boolean
+}
+
+export default function HeroSection({ ready }: HeroSectionProps) {
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '35%'])
-  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0])
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.08])
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
+  const opacity = useTransform(scrollYProgress, [0, 0.65], [1, 0])
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.07])
 
   return (
     <section ref={ref} className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Background image */}
+      {/* Parallax background */}
       <motion.div style={{ scale }} className="absolute inset-0 z-0">
         <img
           src="https://assets.cdn.filesafe.space/F222CaBt1UL1aluI2C1k/media/6a04af9d06993a27a31256e6.jpeg"
           alt=""
           className="w-full h-full object-cover"
-          style={{ opacity: 0.35 }}
+          style={{ opacity: 0.38 }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-bg/70 via-bg/20 to-bg" />
-        {/* Subtle vignette */}
+        {/* Gradient bottom fade */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              'radial-gradient(ellipse at center, transparent 40%, oklch(5% 0.012 275 / 0.7) 100%)',
+              'linear-gradient(to bottom, oklch(5% 0.012 275 / 0.55) 0%, oklch(5% 0.012 275 / 0.1) 40%, oklch(5% 0.012 275) 100%)',
+          }}
+        />
+        {/* Radial vignette */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'radial-gradient(ellipse 80% 80% at 50% 50%, transparent 30%, oklch(5% 0.012 275 / 0.65) 100%)',
           }}
         />
       </motion.div>
 
       {/* Content */}
-      <motion.div style={{ y, opacity }} className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-        {/* Thin gold line top */}
+      <motion.div
+        style={{ y, opacity }}
+        className="relative z-10 text-center px-6 max-w-5xl mx-auto w-full"
+      >
+        {/* Top vertical line */}
         <motion.div
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-          className="w-px h-16 bg-gradient-to-b from-transparent via-gold to-transparent mx-auto mb-10"
+          initial={{ scaleY: 0 }}
+          animate={ready ? { scaleY: 1 } : {}}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="w-px h-14 mx-auto mb-10"
+          style={{
+            background: 'linear-gradient(to bottom, transparent, oklch(68% 0.11 82 / 0.7))',
+            transformOrigin: 'top',
+          }}
         />
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="text-gold text-[10px] tracking-[0.6em] uppercase mb-8 font-sans font-light"
-        >
-          Magia profesional · España
-        </motion.p>
+        {/* Eyebrow */}
+        <FadeIn delay={0.1} ready={ready} className="mb-10">
+          <span
+            className="text-[9px] tracking-[0.7em] uppercase font-sans font-light"
+            style={{ color: 'oklch(68% 0.11 82 / 0.8)' }}
+          >
+            Magia profesional · España
+          </span>
+        </FadeIn>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="font-display font-light text-cream leading-[0.95]"
-          style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)' }}
+        {/* Main title — word split */}
+        <h1
+          className="font-display font-light text-cream leading-[0.9] mb-4"
+          style={{ fontSize: 'clamp(3.8rem, 11vw, 9rem)', letterSpacing: '-0.02em' }}
         >
-          El arte de lo
-          <br />
-          <em className="text-gold italic">imposible</em>
-        </motion.h1>
+          <Word delay={0.2} ready={ready}>
+            El&nbsp;arte&nbsp;de&nbsp;lo
+          </Word>
+        </h1>
+        <h1
+          className="font-display font-light leading-[0.9]"
+          style={{ fontSize: 'clamp(3.8rem, 11vw, 9rem)', letterSpacing: '-0.02em' }}
+        >
+          <Word delay={0.35} ready={ready}>
+            <em className="text-gold italic">imposible</em>
+          </Word>
+        </h1>
 
+        {/* Divider line */}
         <motion.div
           initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 1, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          className="w-24 h-px bg-gold/40 mx-auto my-10"
+          animate={ready ? { scaleX: 1 } : {}}
+          transition={{ duration: 1.2, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
+          className="mx-auto my-10"
+          style={{
+            height: '1px',
+            width: '80px',
+            background: 'oklch(68% 0.11 82 / 0.4)',
+            transformOrigin: 'left',
+          }}
         />
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1 }}
-          className="text-cream/50 text-xs tracking-[0.4em] uppercase font-sans font-light"
-        >
-          Bodas · Comuniones · Eventos de empresa
-        </motion.p>
+        {/* Sub */}
+        <FadeIn delay={0.65} ready={ready}>
+          <p
+            className="text-[10px] tracking-[0.45em] uppercase font-sans font-light"
+            style={{ color: 'oklch(95% 0.01 80 / 0.45)' }}
+          >
+            Bodas · Comuniones · Eventos de empresa
+          </p>
+        </FadeIn>
 
-        <motion.a
-          href="#contacto"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.3 }}
-          className="inline-block mt-14 border border-gold/50 text-gold text-[10px] tracking-[0.4em] uppercase px-12 py-5 hover:bg-gold hover:text-bg hover:border-gold transition-all duration-500 font-sans font-light"
-        >
-          Solicitar presupuesto
-        </motion.a>
+        {/* CTA */}
+        <FadeIn delay={0.8} ready={ready} className="mt-14">
+          <a
+            href="#contacto"
+            className="inline-block text-[10px] tracking-[0.45em] uppercase font-sans font-light px-14 py-5 transition-all duration-500"
+            style={{
+              border: '1px solid oklch(68% 0.11 82 / 0.45)',
+              color: 'oklch(68% 0.11 82)',
+            }}
+            onMouseEnter={(e) => {
+              const el = e.currentTarget
+              el.style.background = 'oklch(68% 0.11 82)'
+              el.style.color = 'oklch(5% 0.012 275)'
+              el.style.borderColor = 'oklch(68% 0.11 82)'
+            }}
+            onMouseLeave={(e) => {
+              const el = e.currentTarget
+              el.style.background = 'transparent'
+              el.style.color = 'oklch(68% 0.11 82)'
+              el.style.borderColor = 'oklch(68% 0.11 82 / 0.45)'
+            }}
+          >
+            Solicitar presupuesto
+          </a>
+        </FadeIn>
       </motion.div>
 
       {/* Scroll indicator */}
       <motion.div
-        animate={{ y: [0, 8, 0] }}
-        transition={{ repeat: Infinity, duration: 2.5, ease: 'easeInOut' }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2"
+        initial={{ opacity: 0 }}
+        animate={ready ? { opacity: 1 } : {}}
+        transition={{ delay: 1.1, duration: 0.8 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-3"
       >
-        <span className="text-gold/40 text-[9px] tracking-[0.4em] uppercase font-sans">Scroll</span>
-        <div className="w-px h-12 bg-gradient-to-b from-gold/60 to-transparent" />
+        <span
+          className="text-[9px] tracking-[0.5em] uppercase font-sans font-light"
+          style={{ color: 'oklch(68% 0.11 82 / 0.35)' }}
+        >
+          Scroll
+        </span>
+        <motion.div
+          animate={{ y: [0, 7, 0] }}
+          transition={{ repeat: Infinity, duration: 2.2, ease: 'easeInOut' }}
+          className="w-px h-10"
+          style={{ background: 'linear-gradient(to bottom, oklch(68% 0.11 82 / 0.5), transparent)' }}
+        />
       </motion.div>
     </section>
   )
