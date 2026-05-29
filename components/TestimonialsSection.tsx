@@ -5,32 +5,32 @@ const testimonials = [
   {
     name: 'Sara & Roberto',
     event: 'Boda — Sevilla',
-    text: 'Martín convirtió nuestra boda en algo que los invitados no olvidarán jamás. Absolutamente alucinante.',
+    text: 'Martín supo leer a nuestros invitados desde el primer instante. No fue solo magia: fue una actuación que marcó el ritmo de toda la velada y generó conversaciones que duraron días. Un profesional de principio a fin.',
   },
   {
     name: 'Carmen López',
     event: 'Comunión — Granada',
-    text: 'Los niños (y los adultos) quedaron con la boca abierta. Martín tiene un don especial para conectar con la gente.',
+    text: 'Llegó puntual, se adaptó a todos los grupos de edad sin esfuerzo aparente y dejó una impresión que siguen comentando quienes estuvieron presentes. Excelente trato y resultado impecable.',
   },
   {
     name: 'TechCorp Spain',
-    event: 'Evento corporativo',
-    text: 'El mejor team building que hemos hecho. Rompió el hielo en 5 minutos. Lo recomendamos sin dudar.',
+    event: 'Evento corporativo — Barcelona',
+    text: 'Necesitábamos cohesionar a un equipo de ochenta personas que apenas se conocían. Martín lo logró en los primeros minutos con una naturalidad y precisión que nos sorprendió a todos. Sin duda repetiremos.',
   },
   {
     name: 'Familia García',
-    event: 'Cumpleaños — Málaga',
-    text: 'Una experiencia mágica de principio a fin. Profesional, cercano y con una magia que te deja sin palabras.',
+    event: 'Celebración familiar — Málaga',
+    text: 'Lo que más valoramos fue su capacidad para involucrar a cada persona sin forzar nada. No es únicamente un mago: es alguien que sabe construir momentos que perduran mucho después del evento.',
   },
   {
     name: 'Isabel & Javier',
     event: 'Aniversario — Madrid',
-    text: 'Nos dejó completamente sin palabras. Cada truco era más impresionante que el anterior. Noche inolvidable.',
+    text: 'Pedimos discreción, elegancia y algo que nuestros invitados no hubieran visto antes. Martín cumplió los tres requisitos con una solvencia que pocas veces encontramos en este tipo de servicios.',
   },
   {
     name: 'Grupo Empresarial Norte',
     event: 'Gala de empresa — Bilbao',
-    text: 'La actuación de Martín fue el momento estrella de la noche. Elegante, cercano y con una técnica impecable.',
+    text: 'En una gala corporativa es difícil encontrar entretenimiento que no resulte impostado. Martín lo resolvió con criterio: ritmo calculado, adaptación constante al público y un desenlace que nadie anticipó.',
   },
 ]
 
@@ -48,7 +48,7 @@ export default function TestimonialsSection() {
           className="font-display text-cream font-light"
           style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}
         >
-          Lo que dicen <em className="text-gold">de Martín</em>
+          Quienes lo <em className="text-gold">han vivido</em>
         </h2>
       </div>
 

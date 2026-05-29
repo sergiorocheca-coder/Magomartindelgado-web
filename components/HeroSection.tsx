@@ -165,7 +165,7 @@ export default function HeroSection({ ready }: HeroSectionProps) {
             style={{
               background: 'linear-gradient(135deg, oklch(76% 0.18 72) 0%, oklch(66% 0.20 52) 100%)',
               color: 'oklch(6% 0.015 265)',
-              borderRadius: '3px',
+              borderRadius: '8px',
             }}
             onMouseEnter={(e) => {
               (e.currentTarget as HTMLElement).style.background =

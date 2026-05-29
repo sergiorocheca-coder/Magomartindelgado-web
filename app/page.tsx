@@ -2,7 +2,7 @@
 import { useState, useCallback } from 'react'
 import Preloader from '@/components/Preloader'
 import NavBar from '@/components/NavBar'
-import HeroSection from '@/components/HeroSection'
+import VideoScrollHero from '@/components/VideoScrollHero'
 import AboutSection from '@/components/AboutSection'
 import ServicesSection from '@/components/ServicesSection'
 import ShowreelSection from '@/components/ShowreelSection'
@@ -19,7 +19,7 @@ export default function Home() {
       <Preloader onComplete={handleComplete} />
       <main>
         <NavBar />
-        <HeroSection ready={ready} />
+        <VideoScrollHero ready={ready} />
         <AboutSection />
         <ServicesSection />
         <ShowreelSection />

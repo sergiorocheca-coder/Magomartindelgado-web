@@ -1,34 +1,70 @@
 ﻿'use client'
 import { useRef, useState, useEffect } from 'react'
-import { motion, useInView, AnimatePresence } from 'motion/react'
+import { motion, useInView } from 'motion/react'
 
 const titles = ['bodas', 'comuniones', 'empresas', 'aniversarios', 'momentos únicos']
 
 function RotatingWord() {
   const [index, setIndex] = useState(0)
+  const [maxWidth, setMaxWidth] = useState(0)
+  const measureRef = useRef<HTMLSpanElement>(null)
 
   useEffect(() => {
     const timer = setInterval(() => setIndex((i) => (i + 1) % titles.length), 2500)
     return () => clearInterval(timer)
   }, [])
 
+  useEffect(() => {
+    const el = measureRef.current
+    if (!el) return
+    let max = 0
+    titles.forEach((word) => {
+      el.textContent = word
+      max = Math.max(max, el.offsetWidth)
+    })
+    el.textContent = ''
+    setMaxWidth(max)
+  }, [])
+
   return (
     <span
-      className="inline-block relative overflow-hidden"
-      style={{ height: '1.05em', verticalAlign: 'bottom' }}
+      style={{
+        display: 'inline-block',
+        position: 'relative',
+        width: maxWidth > 0 ? `${maxWidth + 6}px` : 'auto',
+        height: '0.85em',
+        overflow: 'hidden',
+        verticalAlign: 'baseline',
+        marginBottom: '-0.08em',
+      }}
     >
-      <AnimatePresence mode="wait">
+      {/* Invisible span that inherits the h2 font exactly for measurement */}
+      <span
+        ref={measureRef}
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          visibility: 'hidden',
+          whiteSpace: 'nowrap',
+          fontStyle: 'italic',
+        }}
+      />
+      {titles.map((word, i) => (
         <motion.em
-          key={index}
-          className="text-gold italic block"
-          initial={{ y: '100%', opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: '-100%', opacity: 0 }}
+          key={word}
+          className="text-gold italic"
+          style={{ position: 'absolute', top: 0, left: 0, whiteSpace: 'nowrap', lineHeight: 1 }}
+          initial={{ opacity: 0, y: '100%' }}
+          animate={
+            index === i
+              ? { opacity: 1, y: '0%' }
+              : { opacity: 0, y: index > i ? '-100%' : '100%' }
+          }
           transition={{ type: 'spring', stiffness: 50, damping: 14 }}
         >
-          {titles[index]}
+          {word}
         </motion.em>
-      </AnimatePresence>
+      ))}
     </span>
   )
 }
@@ -58,12 +94,23 @@ export default function ContactSection() {
           </p>
 
           <h2
-            className="font-display font-light text-cream leading-[0.92] mb-16"
+            className="font-display font-light text-cream mb-16"
             style={{ fontSize: 'clamp(3rem, 7vw, 6rem)', letterSpacing: '-0.02em' }}
           >
-            Creamos magia
-            <br />
-            para <RotatingWord />
+            <span style={{ display: 'block', lineHeight: '0.92' }}>Creamos magia</span>
+            <span
+              style={{
+                display: 'flex',
+                alignItems: 'baseline',
+                justifyContent: 'center',
+                gap: '0.22em',
+                lineHeight: '1.15',
+                marginTop: '0.08em',
+              }}
+            >
+              <span>para</span>
+              <RotatingWord />
+            </span>
           </h2>
 
           <div className="w-12 h-px mx-auto mb-10" style={{ background: 'oklch(76% 0.18 72 / 0.35)' }} />
@@ -79,12 +126,12 @@ export default function ContactSection() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             {/* Primary — gradient fill */}
             <a
-              href="https://wa.me/34648146024"
+              href="https://wa.me/34648146024?text=Hola%20buenas!%20Necesito%20m%C3%A1s%20informaci%C3%B3n%20acerca%20de%20los%20espect%C3%A1culos%20para%20mi%20evento"
               className="inline-flex items-center justify-center text-[10px] tracking-[0.4em] uppercase font-sans font-semibold px-14 py-5 transition-all duration-500"
               style={{
                 background: 'linear-gradient(135deg, oklch(76% 0.18 72) 0%, oklch(66% 0.20 52) 100%)',
                 color: 'oklch(6% 0.015 265)',
-                borderRadius: '3px',
+                borderRadius: '8px',
               }}
               onMouseEnter={(e) => {
                 (e.currentTarget as HTMLElement).style.background =
@@ -99,14 +146,14 @@ export default function ContactSection() {
             </a>
             {/* Secondary — gradient border */}
             <a
-              href="mailto:martindelgadosalud@gmail.com"
+              href="mailto:magomartindelgado@gmail.com"
               className="inline-flex items-center justify-center text-[10px] tracking-[0.4em] uppercase font-sans font-light px-14 py-5 transition-all duration-500"
               style={{
                 background:
                   'linear-gradient(oklch(7% 0.018 265), oklch(7% 0.018 265)) padding-box, linear-gradient(135deg, oklch(76% 0.18 72), oklch(66% 0.20 52)) border-box',
                 border: '1px solid transparent',
                 color: 'oklch(76% 0.18 72)',
-                borderRadius: '3px',
+                borderRadius: '8px',
               }}
               onMouseEnter={(e) => {
                 (e.currentTarget as HTMLElement).style.background =
@@ -123,20 +170,6 @@ export default function ContactSection() {
         </motion.div>
       </div>
 
-      {/* Google Maps */}
-      <div className="mt-24 w-full overflow-hidden" style={{ height: '360px' }}>
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3178.2000046108037!2d-3.6141040229303822!3d37.195478672137135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x67e122804d73a0eb%3A0xfd3f64376348989c!2sMago%20Mart%C3%ADn%20Delgado!5e0!3m2!1ses!2ses!4v1779218073815!5m2!1ses!2ses"
-          width="100%"
-          height="100%"
-          style={{ border: 0, filter: 'grayscale(80%) contrast(1.1)' }}
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          title="Mago Martín Delgado — Ubicación"
-          sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
-        />
-      </div>
     </section>
   )
 }

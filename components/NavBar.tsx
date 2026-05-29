@@ -3,40 +3,12 @@ import { useState } from 'react'
 import { motion, useScroll, useMotionValueEvent } from 'motion/react'
 import MobileNav from '@/components/MobileNav'
 
-const leftLinks = [
+const navLinks = [
   { href: '#sobre-mi', label: 'Sobre mí' },
   { href: '#servicios', label: 'Servicios' },
-]
-
-const rightLinks = [
-  { href: '#showreel', label: 'Showreel' },
+  { href: '#showreel', label: 'En acción' },
   { href: '#contacto', label: 'Contacto' },
 ]
-
-function NavLink({ href, label }: { href: string; label: string }) {
-  return (
-    <li>
-      <a href={href} className="relative group inline-block py-1">
-        <span
-          className="text-[10px] tracking-[0.35em] uppercase font-sans font-light transition-colors duration-300 group-hover:text-gold"
-          style={{ color: 'oklch(97% 0.005 80 / 0.55)' }}
-        >
-          {label}
-        </span>
-        {/* Animated underline */}
-        <span
-          className="absolute bottom-0 left-0 h-px transition-all duration-300 ease-out"
-          style={{
-            width: '0%',
-            background: 'oklch(76% 0.18 72)',
-          }}
-          aria-hidden
-          // CSS hover handled via parent group
-        />
-      </a>
-    </li>
-  )
-}
 
 function AnimatedNavLink({ href, label }: { href: string; label: string }) {
   const [hovered, setHovered] = useState(false)
@@ -114,24 +86,21 @@ export default function NavBar() {
       <motion.nav
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-700"
         style={{
-          background: scrolled ? 'oklch(6% 0.015 265 / 0.9)' : 'transparent',
+          background: scrolled ? 'oklch(6% 0.015 265 / 0.92)' : 'transparent',
           backdropFilter: scrolled ? 'blur(20px)' : 'none',
-          borderBottom: scrolled ? '1px solid oklch(76% 0.18 72 / 0.08)' : '1px solid transparent',
+          borderBottom: scrolled
+            ? '1px solid oklch(76% 0.18 72 / 0.08)'
+            : '1px solid transparent',
         }}
       >
-        <div className="px-8 py-4 flex items-center justify-between relative">
-
-          {/* Left links — desktop only */}
-          <ul className="hidden md:flex items-center gap-10">
-            {leftLinks.map((l) => (
-              <AnimatedNavLink key={l.href} href={l.href} label={l.label} />
-            ))}
-          </ul>
-
-          {/* Center logo — absolute centered on desktop, left on mobile */}
-          <a
+        <div className="px-8 py-4 flex items-center justify-between">
+          {/* Logo — LEFT, animated entrance */}
+          <motion.a
             href="#"
-            className="flex flex-col items-center gap-[3px] group md:absolute md:left-1/2 md:-translate-x-1/2"
+            className="flex flex-col gap-[3px] group shrink-0"
+            initial={{ opacity: 0, x: -14 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             <span
               className="font-display font-light tracking-[0.25em] uppercase transition-colors duration-300 group-hover:text-gold"
@@ -149,24 +118,25 @@ export default function NavBar() {
             >
               Mago profesional
             </span>
-          </a>
+          </motion.a>
 
-          {/* Right: links + CTA + hamburger */}
-          <div className="flex items-center gap-10">
-            <ul className="hidden md:flex items-center gap-10">
-              {rightLinks.map((l) => (
+          {/* Right side — nav links + CTA + hamburger */}
+          <div className="flex items-center gap-8">
+            {/* Nav links — desktop only */}
+            <ul className="hidden md:flex items-center gap-8">
+              {navLinks.map((l) => (
                 <AnimatedNavLink key={l.href} href={l.href} label={l.label} />
               ))}
             </ul>
 
-            {/* Gradient CTA */}
+            {/* Contratar CTA — desktop only */}
             <a
               href="#contacto"
               className="hidden md:inline-block text-[9px] tracking-[0.4em] uppercase font-sans font-semibold px-6 py-2.5 transition-all duration-500"
               style={{
                 background: 'linear-gradient(135deg, oklch(76% 0.18 72) 0%, oklch(66% 0.20 52) 100%)',
                 color: 'oklch(6% 0.015 265)',
-                borderRadius: '3px',
+                borderRadius: '6px',
               }}
               onMouseEnter={(e) => {
                 (e.currentTarget as HTMLElement).style.background =

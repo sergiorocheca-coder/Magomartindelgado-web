@@ -41,12 +41,44 @@ const jsonLd = {
 }
 
 export const metadata: Metadata = {
-  title: 'Martín Delgado — Mago Profesional | Bodas, Comuniones, Empresas',
-  description: 'Mago profesional en España. Espectáculos únicos para bodas, comuniones y eventos de empresa.',
+  metadataBase: new URL('https://www.magomartindelgado.com'),
+  title: 'Martín Delgado — Mago Profesional | Bodas, Comuniones y Empresas en Granada',
+  description: 'Mago profesional en Granada y toda España. Espectáculos únicos e irrepetibles para bodas, comuniones y eventos de empresa. Solicita presupuesto sin compromiso.',
+  keywords: ['mago profesional', 'mago bodas Granada', 'mago comuniones Granada', 'mago eventos empresa', 'espectáculo magia Granada', 'contratar mago España'],
+  alternates: {
+    canonical: 'https://www.magomartindelgado.com',
+  },
   openGraph: {
-    title: 'Martín Delgado — Mago Profesional',
-    description: 'Espectáculos de magia profesional para tus momentos más especiales.',
+    type: 'website',
+    url: 'https://www.magomartindelgado.com',
+    locale: 'es_ES',
+    siteName: 'Mago Martín Delgado',
+    title: 'Martín Delgado — Mago Profesional | Granada',
+    description: 'Mago profesional en Granada y toda España. Bodas, comuniones y eventos de empresa. Solicita presupuesto sin compromiso.',
+    images: [
+      {
+        url: 'https://assets.cdn.filesafe.space/F222CaBt1UL1aluI2C1k/media/6a04af9d06993a27a31256e6.jpeg',
+        width: 1200,
+        height: 630,
+        alt: 'Mago Martín Delgado — Espectáculos de Magia Profesional',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Martín Delgado — Mago Profesional | Granada',
+    description: 'Mago profesional en Granada y toda España. Bodas, comuniones y eventos de empresa.',
     images: ['https://assets.cdn.filesafe.space/F222CaBt1UL1aluI2C1k/media/6a04af9d06993a27a31256e6.jpeg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 }
 
