@@ -1,6 +1,6 @@
 ﻿'use client'
 import { useRef, useState, useEffect } from 'react'
-import { motion, useInView } from 'motion/react'
+import { motion, useInView, useReducedMotion } from 'motion/react'
 
 const titles = ['bodas', 'comuniones', 'empresas', 'aniversarios', 'momentos únicos']
 
@@ -8,11 +8,13 @@ function RotatingWord() {
   const [index, setIndex] = useState(0)
   const [maxWidth, setMaxWidth] = useState(0)
   const measureRef = useRef<HTMLSpanElement>(null)
+  const reduceMotion = useReducedMotion()
 
   useEffect(() => {
+    if (reduceMotion) return
     const timer = setInterval(() => setIndex((i) => (i + 1) % titles.length), 2500)
     return () => clearInterval(timer)
-  }, [])
+  }, [reduceMotion])
 
   useEffect(() => {
     const el = measureRef.current

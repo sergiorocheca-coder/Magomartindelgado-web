@@ -1,6 +1,6 @@
 ﻿'use client'
 import { useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react'
 
 interface PreloaderProps {
   onComplete: () => void
@@ -8,14 +8,17 @@ interface PreloaderProps {
 
 export default function Preloader({ onComplete }: PreloaderProps) {
   const [visible, setVisible] = useState(true)
+  const reduceMotion = useReducedMotion()
 
   useEffect(() => {
+    const holdMs = reduceMotion ? 200 : 1800
+    const exitMs = reduceMotion ? 0 : 900
     const timer = setTimeout(() => {
       setVisible(false)
-      setTimeout(onComplete, 900)
-    }, 1800)
+      setTimeout(onComplete, exitMs)
+    }, holdMs)
     return () => clearTimeout(timer)
-  }, [onComplete])
+  }, [onComplete, reduceMotion])
 
   return (
     <AnimatePresence>

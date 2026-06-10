@@ -44,7 +44,7 @@ function Hamburger({ open, onClick }: { open: boolean; onClick: () => void }) {
     <button
       onClick={onClick}
       aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
-      className="md:hidden flex flex-col justify-center items-end gap-[5px] w-8 h-8 cursor-pointer"
+      className="md:hidden flex flex-col justify-center items-end gap-[5px] w-11 h-11 p-1.5 cursor-pointer"
     >
       <span
         className="block h-px transition-all duration-300"
@@ -105,6 +105,8 @@ export default function NavBar() {
             <img
               src="/logo-martin-navbar.png"
               alt="Mago Martín Delgado"
+              width={131}
+              height={48}
               className="h-10 md:h-12 w-auto object-contain"
             />
           </motion.a>

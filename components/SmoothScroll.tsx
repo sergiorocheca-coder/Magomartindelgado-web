@@ -9,6 +9,12 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
   const [lenis, setLenis] = useState<Lenis | null>(null)
 
   useEffect(() => {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReduced) {
+      // Native scroll only — no Lenis, no momentum. Anchor links use native jump.
+      return
+    }
+
     const instance = new Lenis({
       lerp: 0.1,
       wheelMultiplier: 0.85,

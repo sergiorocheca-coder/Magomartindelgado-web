@@ -24,7 +24,7 @@ const jsonLd = {
   description: 'Mago profesional en España. Espectáculos únicos para bodas, comuniones y eventos de empresa.',
   url: 'https://www.magomartindelgado.com',
   telephone: '+34648146024',
-  email: 'martindelgadosalud@gmail.com',
+  email: 'magomartindelgado@gmail.com',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Granada',
@@ -86,6 +86,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es" className={`${cormorant.variable} ${montserrat.variable}`}>
       <head>
+        <link rel="preload" as="image" href="/frames/frame_0001.webp" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

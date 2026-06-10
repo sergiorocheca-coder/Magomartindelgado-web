@@ -23,6 +23,8 @@
       <img
         src="/logo-martin-footer.png"
         alt="Mago Martín Delgado"
+        width={116}
+        height={96}
         className="mx-auto mb-6 h-16 md:h-24 w-auto object-contain relative"
       />
       <p

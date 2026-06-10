@@ -8,7 +8,10 @@ export default function CursorGlow() {
     const el = glowRef.current
     if (!el) return
 
-    if (window.matchMedia('(pointer: coarse)').matches) {
+    if (
+      window.matchMedia('(pointer: coarse)').matches ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
       el.style.display = 'none'
       return
     }
