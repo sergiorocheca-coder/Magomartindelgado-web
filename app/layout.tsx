@@ -35,7 +35,7 @@ const jsonLd = {
     latitude: 37.195478672137135,
     longitude: -3.6141040229303822,
   },
-  image: 'https://assets.cdn.filesafe.space/F222CaBt1UL1aluI2C1k/media/6a04af9d06993a27a31256e6.jpeg',
+  image: '/og-image.jpg',
   priceRange: '€€€',
   serviceType: ['Bodas', 'Comuniones', 'Eventos de empresa', 'Eventos privados'],
 }
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     description: 'Mago profesional en Granada y toda España. Bodas, comuniones y eventos de empresa. Solicita presupuesto sin compromiso.',
     images: [
       {
-        url: 'https://assets.cdn.filesafe.space/F222CaBt1UL1aluI2C1k/media/6a04af9d06993a27a31256e6.jpeg',
+        url: '/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'Mago Martín Delgado — Espectáculos de Magia Profesional',
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Martín Delgado — Mago Profesional | Granada',
     description: 'Mago profesional en Granada y toda España. Bodas, comuniones y eventos de empresa.',
-    images: ['https://assets.cdn.filesafe.space/F222CaBt1UL1aluI2C1k/media/6a04af9d06993a27a31256e6.jpeg'],
+    images: ['/og-image.jpg'],
   },
   robots: {
     index: true,

@@ -57,7 +57,7 @@ export default function AboutSection() {
           <div className="relative aspect-[3/4] overflow-hidden">
             <motion.img
               style={{ y: imgY, scale: 1.12 }}
-              src="https://assets.cdn.filesafe.space/F222CaBt1UL1aluI2C1k/media/6a04af9d06993a27a31256e6.jpeg"
+              src="/martin-about.webp"
               alt="Martín Delgado"
               className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
             />

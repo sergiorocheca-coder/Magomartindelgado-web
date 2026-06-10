@@ -43,7 +43,7 @@ export default function ShowreelSection() {
         <ScrollExpandMedia
           mediaType="video"
           mediaSrc={EMBED_AUTO}
-          bgImageSrc="https://assets.cdn.filesafe.space/F222CaBt1UL1aluI2C1k/media/6a04af9d06993a27a31256e6.jpeg"
+          bgImageSrc="/martin-showreel.webp"
           title="Martín en acción"
           scrollToExpand="Desplázate para descubrir"
           textBlend={false}

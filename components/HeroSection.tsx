@@ -65,7 +65,7 @@ export default function HeroSection({ ready }: HeroSectionProps) {
       {/* Parallax background */}
       <motion.div style={{ scale }} className="absolute inset-0 z-0">
         <img
-          src="https://assets.cdn.filesafe.space/F222CaBt1UL1aluI2C1k/media/6a04af9d06993a27a31256e6.jpeg"
+          src="/martin-showreel.webp"
           alt=""
           className="w-full h-full object-cover"
           style={{ opacity: 0.45 }}

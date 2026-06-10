@@ -97,27 +97,16 @@ export default function NavBar() {
           {/* Logo — LEFT, animated entrance */}
           <motion.a
             href="#"
-            className="flex flex-col gap-[3px] group shrink-0"
+            className="shrink-0"
             initial={{ opacity: 0, x: -14 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            <span
-              className="font-display font-light tracking-[0.25em] uppercase transition-colors duration-300 group-hover:text-gold"
-              style={{
-                color: 'oklch(97% 0.005 80)',
-                fontSize: 'clamp(0.8rem, 1.2vw, 1rem)',
-                lineHeight: 1,
-              }}
-            >
-              Martín Delgado
-            </span>
-            <span
-              className="font-sans font-light tracking-[0.6em] uppercase hidden md:block"
-              style={{ fontSize: '0.45rem', color: 'oklch(76% 0.18 72)', lineHeight: 1 }}
-            >
-              Mago profesional
-            </span>
+            <img
+              src="/logo-martin-navbar.png"
+              alt="Mago Martín Delgado"
+              className="h-10 md:h-12 w-auto object-contain"
+            />
           </motion.a>
 
           {/* Right side — nav links + CTA + hamburger */}

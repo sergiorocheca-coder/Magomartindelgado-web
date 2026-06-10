@@ -20,9 +20,14 @@
           pointerEvents: 'none',
         }}
       />
+      <img
+        src="/logo-martin-footer.png"
+        alt="Mago Martín Delgado"
+        className="mx-auto mb-6 h-16 md:h-24 w-auto object-contain relative"
+      />
       <p
         className="font-display font-light mb-4 relative"
-        style={{ fontSize: 'clamp(4.5rem, 11vw, 9rem)', color: 'oklch(76% 0.18 72)', letterSpacing: '-0.02em' }}
+        style={{ fontSize: 'clamp(3rem, 8vw, 6rem)', color: 'oklch(76% 0.18 72)', letterSpacing: '-0.02em' }}
       >
         Martín Delgado
       </p>
