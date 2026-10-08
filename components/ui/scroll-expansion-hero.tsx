@@ -1,6 +1,6 @@
 ﻿'use client'
 import { useRef, useEffect, useState, ReactNode } from 'react'
-import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react'
+import { motion, useScroll, useTransform } from 'motion/react'
 import { useLenis } from '@/components/SmoothScroll'
 
 interface ScrollExpandMediaProps {

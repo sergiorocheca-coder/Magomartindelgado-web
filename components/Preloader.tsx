@@ -11,8 +11,8 @@ export default function Preloader({ onComplete }: PreloaderProps) {
   const reduceMotion = useReducedMotion()
 
   useEffect(() => {
-    const holdMs = reduceMotion ? 200 : 1800
-    const exitMs = reduceMotion ? 0 : 900
+    const holdMs = reduceMotion ? 200 : 500
+    const exitMs = reduceMotion ? 0 : 600
     const timer = setTimeout(() => {
       setVisible(false)
       setTimeout(onComplete, exitMs)
@@ -27,7 +27,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
           className="fixed inset-0 z-[200] flex flex-col items-center justify-center"
           style={{ background: 'oklch(6% 0.015 265)' }}
           exit={{ y: '-100%' }}
-          transition={{ duration: 0.85, ease: [0.76, 0, 0.24, 1] }}
+          transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
         >
           {/* Name */}
           <motion.p

@@ -22,6 +22,7 @@ export default function VideoScrollHero({ ready }: VideoScrollHeroProps) {
   const moment3Ref = useRef<HTMLDivElement>(null)
   const [mounted, setMounted] = useState(false)
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect -- client-only mount flag
   useEffect(() => { setMounted(true) }, [])
 
   function updateOverlays(progress: number) {

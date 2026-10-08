@@ -1,13 +1,18 @@
 'use client'
 import ScrollExpandMedia from '@/components/ui/scroll-expansion-hero'
+import { createDataAttribute } from '@sanity/visual-editing/create-data-attribute'
+import type { ResolvedShowreel } from '@/sanity/resolve'
 
-const EMBED_AUTO =
-  'https://www.youtube.com/embed/uuakMP-qySg?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&playsinline=1&rel=0&playlist=uuakMP-qySg'
+const DEFAULT_YOUTUBE_ID = 'uuakMP-qySg'
 
-const EMBED_NORMAL =
-  'https://www.youtube.com/embed/uuakMP-qySg?controls=1&rel=0&modestbranding=1'
+export default function ShowreelSection({ content, isDraft }: { content?: ResolvedShowreel; isDraft?: boolean }) {
+  const id = content?.youtubeId || DEFAULT_YOUTUBE_ID
+  const EMBED_AUTO = `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&playsinline=1&rel=0&playlist=${id}`
+  const EMBED_NORMAL = `https://www.youtube.com/embed/${id}?controls=1&rel=0&modestbranding=1`
+  const titlePlain = content?.titlePlain || 'Martín en'
+  const titleAccent = content?.titleAccent || 'acción'
+  const poster = content?.poster || '/martin-showreel.webp'
 
-export default function ShowreelSection() {
   return (
     <section id="showreel">
       {/* Mobile: plain embed — no scroll trick (avoids touch/Lenis conflict) */}
@@ -17,13 +22,13 @@ export default function ShowreelSection() {
             className="text-[9px] tracking-[0.6em] uppercase font-sans font-light mb-4"
             style={{ color: 'oklch(76% 0.18 72)' }}
           >
-            Showreel
+            {content?.eyebrow || 'Showreel'}
           </p>
           <h2
             className="font-display font-light text-cream"
             style={{ fontSize: 'clamp(2rem, 8vw, 3.5rem)', letterSpacing: '-0.02em' }}
           >
-            Martín en <em className="text-gold">acción</em>
+            {titlePlain} <em className="text-gold">{titleAccent}</em>
           </h2>
         </div>
         <div className="relative aspect-video overflow-hidden" style={{ borderRadius: '4px' }}>
@@ -39,12 +44,20 @@ export default function ShowreelSection() {
       </div>
 
       {/* Desktop: full scroll-expansion effect */}
-      <div className="hidden md:block">
+      <div className="hidden md:block relative">
+        {isDraft && (
+          <div
+            className="absolute top-4 left-4 z-50 pointer-events-auto"
+            data-sanity={createDataAttribute({ id: 'showreel', type: 'showreel', path: 'poster', baseUrl: '/studio' }).toString()}
+            style={{ width: 48, height: 48 }}
+            aria-hidden
+          />
+        )}
         <ScrollExpandMedia
           mediaType="video"
           mediaSrc={EMBED_AUTO}
-          bgImageSrc="/martin-showreel.webp"
-          title="Martín en acción"
+          bgImageSrc={poster}
+          title={`${titlePlain} ${titleAccent}`}
           scrollToExpand="Desplázate para descubrir"
           textBlend={false}
         />

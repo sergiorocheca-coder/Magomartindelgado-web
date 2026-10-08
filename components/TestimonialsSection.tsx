@@ -1,7 +1,8 @@
 ﻿'use client'
 import { motion } from 'motion/react'
+import type { ResolvedTestimonials } from '@/sanity/resolve'
 
-const testimonials = [
+const defaultTestimonials = [
   {
     name: 'Sara & Roberto',
     event: 'Boda — Sevilla',
@@ -34,7 +35,8 @@ const testimonials = [
   },
 ]
 
-export default function TestimonialsSection() {
+export default function TestimonialsSection({ content }: { content?: ResolvedTestimonials }) {
+  const testimonials = content?.items?.length ? content.items : defaultTestimonials
   return (
     <section
       className="py-32 overflow-hidden"
@@ -42,13 +44,14 @@ export default function TestimonialsSection() {
     >
       <div className="text-center mb-20 px-6">
         <p className="text-gold text-[10px] tracking-[0.5em] uppercase mb-5 font-sans font-light">
-          Testimonios
+          {content?.eyebrow || 'Testimonios'}
         </p>
         <h2
           className="font-display text-cream font-light"
           style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}
         >
-          Quienes lo <em className="text-gold">han vivido</em>
+          {content?.titlePlain || 'Quienes lo'}{' '}
+          <em className="text-gold">{content?.titleAccent || 'han vivido'}</em>
         </h2>
       </div>
 

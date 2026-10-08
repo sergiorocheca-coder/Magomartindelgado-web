@@ -59,3 +59,12 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* MOMENT 3 in the hero has the same z-10 as MOMENT 1 but sits later in the DOM,
+   so it wins stacking and blocks clicks on the CTA below it.
+   GSAP never sets pointer-events:none on MOMENT 3 (only MOMENT 2 gets that).
+   This rule disables pointer events on any zero-opacity overlay inside the hero
+   so transparent moments never intercept clicks. */
+#hero-scroll [style*="opacity: 0;"] {
+  pointer-events: none;
+}

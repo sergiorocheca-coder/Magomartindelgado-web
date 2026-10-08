@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { motion, useScroll, useMotionValueEvent } from 'motion/react'
+import { createDataAttribute } from '@sanity/visual-editing/create-data-attribute'
 import MobileNav from '@/components/MobileNav'
 
 const navLinks = [
@@ -75,7 +76,7 @@ function Hamburger({ open, onClick }: { open: boolean; onClick: () => void }) {
   )
 }
 
-export default function NavBar() {
+export default function NavBar({ logo, isDraft }: { logo?: string | null; isDraft?: boolean }) {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const { scrollY } = useScroll()
@@ -96,17 +97,20 @@ export default function NavBar() {
         <div className="px-8 py-4 flex items-center justify-between">
           {/* Logo — LEFT, animated entrance */}
           <motion.a
-            href="#"
+            href="/"
             className="shrink-0"
             initial={{ opacity: 0, x: -14 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             <img
-              src="/logo-martin-navbar.png"
+              src={logo || '/logo-martin-navbar.png'}
               alt="Mago Martín Delgado"
               width={131}
               height={48}
+              {...(isDraft && {
+                'data-sanity': createDataAttribute({ id: 'siteSettings', type: 'siteSettings', path: 'logoNavbar', baseUrl: '/studio' }).toString(),
+              })}
               className="h-10 md:h-12 w-auto object-contain"
             />
           </motion.a>

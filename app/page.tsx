@@ -1,32 +1,24 @@
-'use client'
-import { useState, useCallback } from 'react'
-import Preloader from '@/components/Preloader'
-import NavBar from '@/components/NavBar'
-import VideoScrollHero from '@/components/VideoScrollHero'
-import AboutSection from '@/components/AboutSection'
-import ServicesSection from '@/components/ServicesSection'
-import ShowreelSection from '@/components/ShowreelSection'
-import TestimonialsSection from '@/components/TestimonialsSection'
-import ContactSection from '@/components/ContactSection'
-import Footer from '@/components/Footer'
+import { draftMode } from 'next/headers'
+import { VisualEditing } from 'next-sanity/visual-editing'
+import HomeClient from '@/components/HomeClient'
+import { getSiteContent } from '@/sanity/queries'
+import { resolveContent } from '@/sanity/resolve'
+import { previewClient } from '@/sanity/client'
 
-export default function Home() {
-  const [ready, setReady] = useState(false)
-  const handleComplete = useCallback(() => setReady(true), [])
+// Force dynamic so the draft-mode cookie is always evaluated server-side.
+// This is required for the Sanity Presentation tool (Visual Editing) to work.
+// For the public site, ISR revalidation via /api/revalidate keeps the CDN fresh.
+export const dynamic = 'force-dynamic'
+
+export default async function Home() {
+  const { isEnabled: isDraft } = await draftMode()
+  const fetchClient = isDraft ? previewClient : undefined
+  const content = resolveContent(await getSiteContent(fetchClient, isDraft), isDraft)
 
   return (
     <>
-      <Preloader onComplete={handleComplete} />
-      <main>
-        <NavBar />
-        <VideoScrollHero ready={ready} />
-        <AboutSection />
-        <ServicesSection />
-        <ShowreelSection />
-        <TestimonialsSection />
-        <ContactSection />
-        <Footer />
-      </main>
+      <HomeClient content={content} />
+      {isDraft && <VisualEditing />}
     </>
   )
 }

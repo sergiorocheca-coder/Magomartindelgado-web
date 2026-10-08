@@ -1,4 +1,14 @@
-﻿export default function Footer() {
+﻿import { createDataAttribute } from '@sanity/visual-editing/create-data-attribute'
+
+export default function Footer({
+  logo,
+  tagline,
+  isDraft,
+}: {
+  logo?: string | null
+  tagline?: string
+  isDraft?: boolean
+}) {
   return (
     <footer
       className="py-24 px-6 text-center relative overflow-hidden"
@@ -21,23 +31,20 @@
         }}
       />
       <img
-        src="/logo-martin-footer.png"
+        src={logo || '/logo-martin-footer.png'}
         alt="Mago Martín Delgado"
-        width={116}
-        height={96}
-        className="mx-auto mb-6 h-16 md:h-24 w-auto object-contain relative"
+        width={1439}
+        height={1188}
+        className="mx-auto mb-8 h-24 md:h-32 w-auto object-contain relative"
+        {...(isDraft && {
+          'data-sanity': createDataAttribute({ id: 'siteSettings', type: 'siteSettings', path: 'logoFooter', baseUrl: '/studio' }).toString(),
+        })}
       />
-      <p
-        className="font-display font-light mb-4 relative"
-        style={{ fontSize: 'clamp(3rem, 8vw, 6rem)', color: 'oklch(76% 0.18 72)', letterSpacing: '-0.02em' }}
-      >
-        Martín Delgado
-      </p>
       <p
         className="tracking-[0.6em] uppercase font-sans font-light relative"
         style={{ fontSize: 'clamp(0.9rem, 1.8vw, 1.15rem)', color: 'oklch(97% 0.005 80 / 0.75)' }}
       >
-        Mago Profesional · España
+        {tagline || 'Mago Profesional · España'}
       </p>
       <p
         className="text-[10px] mt-8 font-sans font-light relative"

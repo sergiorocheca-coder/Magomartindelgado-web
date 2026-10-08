@@ -1,9 +1,12 @@
 import type { NextConfig } from 'next'
 
-const securityHeaders = [
+// Strict CSP for the public marketing site. Sanity image CDN added so
+// CMS-managed photos load.
+const publicHeaders = [
   { key: 'X-Content-Type-Options', value: 'nosniff' },
-  // Prevents our site from being embedded in any iframe (clickjacking protection)
-  { key: 'X-Frame-Options', value: 'DENY' },
+  // frame-ancestors in CSP controls iframe permissions in all modern browsers.
+  // X-Frame-Options is removed to avoid conflict with frame-ancestors.
+  // (SAMEORIGIN is already covered by frame-ancestors 'self' below)
   { key: 'X-DNS-Prefetch-Control', value: 'off' },
   { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
   {
@@ -12,7 +15,7 @@ const securityHeaders = [
   },
   {
     key: 'Strict-Transport-Security',
-    value: 'max-age=63072000; includeSubDomains; preload',
+    value: 'max-age=31536000',
   },
   // Allows WhatsApp/external links to open without cross-origin issues
   { key: 'Cross-Origin-Opener-Policy', value: 'same-origin-allow-popups' },
@@ -25,10 +28,11 @@ const securityHeaders = [
       "script-src 'self' 'unsafe-inline'",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
-      "img-src 'self' data: https://assets.cdn.filesafe.space",
+      "img-src 'self' data: https://assets.cdn.filesafe.space https://cdn.sanity.io",
       // YouTube embed only — Google Maps removed
       "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com",
-      "connect-src 'self'",
+      "connect-src 'self' https://*.sanity.io https://cdn.sanity.io",
+      "frame-ancestors 'self' https://www.magomartindelgado.com https://magomartindelgado.com",
       "object-src 'none'",
       "base-uri 'self'",
       "form-action 'self'",
@@ -38,12 +42,42 @@ const securityHeaders = [
   },
 ]
 
+// Relaxed CSP scoped ONLY to /studio. Sanity Studio needs eval, web workers,
+// blob/data sources and connections to *.sanity.io. This does NOT affect the
+// public site, which keeps the strict policy above.
+const studioHeaders = [
+  { key: 'X-Content-Type-Options', value: 'nosniff' },
+  { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+  {
+    key: 'Content-Security-Policy',
+    value: [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' blob:",
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data: blob: https://cdn.sanity.io https://*.sanity.io",
+      "font-src 'self' data:",
+      "connect-src 'self' https://api.sanity.io https://*.api.sanity.io https://*.apicdn.sanity.io https://cdn.sanity.io wss://*.api.sanity.io",
+      "worker-src 'self' blob:",
+      "frame-src 'self' https://www.magomartindelgado.com https://magomartindelgado.com",
+      "object-src 'none'",
+      "base-uri 'self'",
+      "frame-ancestors 'self'",
+    ].join('; '),
+  },
+]
+
 const nextConfig: NextConfig = {
   async headers() {
     return [
+      // Studio gets its own relaxed policy.
       {
-        source: '/(.*)',
-        headers: securityHeaders,
+        source: '/studio/:path*',
+        headers: studioHeaders,
+      },
+      // Everything except /studio gets the strict policy.
+      {
+        source: '/((?!studio).*)',
+        headers: publicHeaders,
       },
     ]
   },

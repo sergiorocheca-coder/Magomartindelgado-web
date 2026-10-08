@@ -1,8 +1,9 @@
 'use client'
 import { useRef } from 'react'
 import { motion, useInView } from 'motion/react'
+import type { ResolvedServices } from '@/sanity/resolve'
 
-const services = [
+const defaultServices = [
   {
     num: 'I',
     title: 'Bodas',
@@ -25,11 +26,13 @@ const services = [
   },
 ]
 
-export default function ServicesSection() {
+export default function ServicesSection({ content }: { content?: ResolvedServices }) {
   const headerRef = useRef(null)
   const gridRef = useRef(null)
   const headerInView = useInView(headerRef, { once: true, margin: '-60px' })
   const gridInView = useInView(gridRef, { once: true, margin: '-40px' })
+
+  const services = content?.items?.length ? content.items : defaultServices
 
   return (
     <section id="servicios" className="py-32" style={{ background: 'oklch(8% 0.016 265)' }}>
@@ -46,13 +49,14 @@ export default function ServicesSection() {
             className="text-[9px] tracking-[0.6em] uppercase font-sans font-light mb-5"
             style={{ color: 'oklch(76% 0.18 72)' }}
           >
-            Servicios
+            {content?.eyebrow || 'Servicios'}
           </p>
           <h2
             className="font-display font-light text-cream"
             style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)', letterSpacing: '-0.02em' }}
           >
-            Magia para <em className="text-gold">cada momento</em>
+            {content?.titlePlain || 'Magia para'}{' '}
+            <em className="text-gold">{content?.titleAccent || 'cada momento'}</em>
           </h2>
         </motion.div>
 

@@ -1,10 +1,11 @@
 ﻿'use client'
 import { useRef, useState, useEffect } from 'react'
 import { motion, useInView, useReducedMotion } from 'motion/react'
+import type { ResolvedContact } from '@/sanity/resolve'
 
-const titles = ['bodas', 'comuniones', 'empresas', 'aniversarios', 'momentos únicos']
+const defaultRotatingWords = ['bodas', 'comuniones', 'empresas', 'aniversarios', 'momentos únicos']
 
-function RotatingWord() {
+function RotatingWord({ words }: { words: string[] }) {
   const [index, setIndex] = useState(0)
   const [maxWidth, setMaxWidth] = useState(0)
   const measureRef = useRef<HTMLSpanElement>(null)
@@ -12,21 +13,21 @@ function RotatingWord() {
 
   useEffect(() => {
     if (reduceMotion) return
-    const timer = setInterval(() => setIndex((i) => (i + 1) % titles.length), 2500)
+    const timer = setInterval(() => setIndex((i) => (i + 1) % words.length), 2500)
     return () => clearInterval(timer)
-  }, [reduceMotion])
+  }, [reduceMotion, words.length])
 
   useEffect(() => {
     const el = measureRef.current
     if (!el) return
     let max = 0
-    titles.forEach((word) => {
+    words.forEach((word) => {
       el.textContent = word
       max = Math.max(max, el.offsetWidth)
     })
     el.textContent = ''
     setMaxWidth(max)
-  }, [])
+  }, [words])
 
   return (
     <span
@@ -51,7 +52,7 @@ function RotatingWord() {
           fontStyle: 'italic',
         }}
       />
-      {titles.map((word, i) => (
+      {words.map((word, i) => (
         <motion.em
           key={word}
           className="text-gold italic"
@@ -71,9 +72,14 @@ function RotatingWord() {
   )
 }
 
-export default function ContactSection() {
+export default function ContactSection({ content }: { content?: ResolvedContact }) {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
+
+  const words = content?.rotatingWords?.length ? content.rotatingWords : defaultRotatingWords
+  const whatsapp = content?.whatsapp || '34648146024'
+  const email = content?.email || 'magomartindelgado@gmail.com'
+  const whatsappHref = `https://wa.me/${whatsapp}?text=Hola%20buenas!%20Necesito%20m%C3%A1s%20informaci%C3%B3n%20acerca%20de%20los%20espect%C3%A1culos%20para%20mi%20evento`
 
   return (
     <section
@@ -92,14 +98,14 @@ export default function ContactSection() {
             className="text-[9px] tracking-[0.6em] uppercase font-sans font-light mb-10"
             style={{ color: 'oklch(76% 0.18 72)' }}
           >
-            Contacto
+            {content?.eyebrow || 'Contacto'}
           </p>
 
           <h2
             className="font-display font-light text-cream mb-16"
             style={{ fontSize: 'clamp(3rem, 7vw, 6rem)', letterSpacing: '-0.02em' }}
           >
-            <span style={{ display: 'block', lineHeight: '0.92' }}>Creamos magia</span>
+            <span style={{ display: 'block', lineHeight: '0.92' }}>{content?.titleLine1 || 'Creamos magia'}</span>
             <span
               style={{
                 display: 'flex',
@@ -110,8 +116,8 @@ export default function ContactSection() {
                 marginTop: '0.08em',
               }}
             >
-              <span>para</span>
-              <RotatingWord />
+              <span>{content?.titlePrefix || 'para'}</span>
+              <RotatingWord words={words} />
             </span>
           </h2>
 
@@ -121,14 +127,13 @@ export default function ContactSection() {
             className="leading-relaxed mb-16 max-w-sm mx-auto text-sm font-sans font-light tracking-wide"
             style={{ color: 'oklch(97% 0.005 80 / 0.45)' }}
           >
-            Cuéntame qué tienes en mente. Te preparo una propuesta
-            personalizada sin ningún compromiso.
+            {content?.text || 'Cuéntame qué tienes en mente. Te preparo una propuesta personalizada sin ningún compromiso.'}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             {/* Primary — gradient fill */}
             <a
-              href="https://wa.me/34648146024?text=Hola%20buenas!%20Necesito%20m%C3%A1s%20informaci%C3%B3n%20acerca%20de%20los%20espect%C3%A1culos%20para%20mi%20evento"
+              href={whatsappHref}
               className="inline-flex items-center justify-center text-[10px] tracking-[0.4em] uppercase font-sans font-semibold px-14 py-5 transition-all duration-500"
               style={{
                 background: 'linear-gradient(135deg, oklch(76% 0.18 72) 0%, oklch(66% 0.20 52) 100%)',
@@ -148,7 +153,7 @@ export default function ContactSection() {
             </a>
             {/* Secondary — gradient border */}
             <a
-              href="mailto:magomartindelgado@gmail.com"
+              href={`mailto:${email}`}
               className="inline-flex items-center justify-center text-[10px] tracking-[0.4em] uppercase font-sans font-light px-14 py-5 transition-all duration-500"
               style={{
                 background:

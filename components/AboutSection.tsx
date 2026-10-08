@@ -1,8 +1,10 @@
 ﻿'use client'
 import { useRef } from 'react'
 import { motion, useInView, useScroll, useTransform } from 'motion/react'
+import { createDataAttribute } from '@sanity/visual-editing/create-data-attribute'
+import type { ResolvedAbout } from '@/sanity/resolve'
 
-const stats = [
+const defaultStats = [
   { value: '+500', label: 'Eventos realizados' },
   { value: '+15', label: 'Años de experiencia' },
   { value: '100%', label: 'Satisfacción garantizada' },
@@ -32,10 +34,12 @@ function Reveal({
   )
 }
 
-export default function AboutSection() {
+export default function AboutSection({ content, isDraft }: { content?: ResolvedAbout; isDraft?: boolean }) {
   const imgRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({ target: imgRef, offset: ['start end', 'end start'] })
   const imgY = useTransform(scrollYProgress, [0, 1], ['6%', '-6%'])
+
+  const stats = content?.stats?.length ? content.stats : defaultStats
 
   return (
     <section id="sobre-mi" className="relative py-36 px-6 overflow-hidden">
@@ -54,10 +58,15 @@ export default function AboutSection() {
       <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-24 items-center relative">
         {/* Image with scroll parallax */}
         <div ref={imgRef} className="relative overflow-hidden">
-          <div className="relative aspect-[3/4] overflow-hidden">
+          <div
+            className="relative aspect-[3/4] overflow-hidden"
+            {...(isDraft && {
+              'data-sanity': createDataAttribute({ id: 'about', type: 'about', path: 'photo', baseUrl: '/studio' }).toString(),
+            })}
+          >
             <motion.img
               style={{ y: imgY, scale: 1.12 }}
-              src="/martin-about.webp"
+              src={content?.photo || '/martin-about.webp'}
               alt="Martín Delgado"
               className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
             />
@@ -83,7 +92,7 @@ export default function AboutSection() {
         <div>
           <Reveal>
             <p className="text-[9px] tracking-[0.6em] uppercase font-sans font-light mb-6" style={{ color: 'oklch(76% 0.18 72)' }}>
-              Sobre mí
+              {content?.eyebrow || 'Sobre mí'}
             </p>
           </Reveal>
 
@@ -96,9 +105,9 @@ export default function AboutSection() {
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
             >
-              Martín
+              {content?.titleLine1 || 'Martín'}
               <br />
-              <em className="text-gold">Delgado</em>
+              <em className="text-gold">{content?.titleLine2 || 'Delgado'}</em>
             </motion.h2>
           </div>
 
@@ -108,16 +117,15 @@ export default function AboutSection() {
 
           <Reveal delay={0.15}>
             <p className="leading-relaxed mb-6 text-sm font-sans font-light tracking-wide" style={{ color: 'oklch(97% 0.005 80 / 0.58)' }}>
-              Mago profesional especializado en crear experiencias únicas e irrepetibles.
-              Cada actuación está diseñada para sorprender, emocionar y dejar una huella
-              imborrable en los momentos más especiales de tu vida.
+              {content?.paragraph1 ||
+                'Mago profesional especializado en crear experiencias únicas e irrepetibles. Cada actuación está diseñada para sorprender, emocionar y dejar una huella imborrable en los momentos más especiales de tu vida.'}
             </p>
           </Reveal>
 
           <Reveal delay={0.2}>
             <p className="leading-relaxed mb-14 text-sm font-sans font-light tracking-wide" style={{ color: 'oklch(97% 0.005 80 / 0.58)' }}>
-              Desde íntimas celebraciones familiares hasta grandes eventos corporativos,
-              adapto cada espectáculo para convertirlo en el recuerdo más mágico del evento.
+              {content?.paragraph2 ||
+                'Desde íntimas celebraciones familiares hasta grandes eventos corporativos, adapto cada espectáculo para convertirlo en el recuerdo más mágico del evento.'}
             </p>
           </Reveal>
 

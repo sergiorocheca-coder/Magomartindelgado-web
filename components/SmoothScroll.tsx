@@ -21,6 +21,8 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       touchMultiplier: 1.5,
       infinite: false,
     })
+    // Lenis only exists client-side, so it must be published to context from the effect.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLenis(instance)
 
     function raf(time: number) {
@@ -34,6 +36,21 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
       if (!anchor) return
       const href = anchor.getAttribute('href')
       if (!href) return
+
+      // CTA inside the pinned hero — pass the absolute pixel position to Lenis
+      // so it doesn't re-calculate from the element (which can stall against the GSAP pin).
+      if (anchor.closest('#hero-scroll') && href === '#contacto') {
+        e.preventDefault()
+        const target = document.querySelector(href) as HTMLElement | null
+        if (!target) return
+        const top = target.getBoundingClientRect().top + window.scrollY - 80
+        instance.scrollTo(top, {
+          duration: 2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        })
+        return
+      }
+
       const target = document.querySelector(href)
       if (target) {
         e.preventDefault()
