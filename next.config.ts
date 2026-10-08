@@ -67,6 +67,17 @@ const studioHeaders = [
 ]
 
 const nextConfig: NextConfig = {
+  // Canonical host is www: send the bare domain there permanently.
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'magomartindelgado.com' }],
+        destination: 'https://www.magomartindelgado.com/:path*',
+        permanent: true,
+      },
+    ]
+  },
   async headers() {
     return [
       // Studio gets its own relaxed policy.

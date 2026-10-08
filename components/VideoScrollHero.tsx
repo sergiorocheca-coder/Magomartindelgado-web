@@ -182,16 +182,6 @@ export default function VideoScrollHero({ ready }: VideoScrollHeroProps) {
             Magia profesional · España
           </p>
           <h1
-            className="font-display font-light text-cream leading-[0.9] mb-4"
-            style={{
-              fontSize: 'clamp(3.2rem, 11vw, 9rem)',
-              letterSpacing: '-0.02em',
-              textShadow: '0 2px 60px rgba(0,0,0,0.95), 0 0 120px rgba(0,0,0,0.8)',
-            }}
-          >
-            El&nbsp;arte&nbsp;de&nbsp;lo
-          </h1>
-          <h1
             className="font-display font-light leading-[0.9]"
             style={{
               fontSize: 'clamp(3.2rem, 11vw, 9rem)',
@@ -199,7 +189,9 @@ export default function VideoScrollHero({ ready }: VideoScrollHeroProps) {
               textShadow: '0 2px 60px rgba(0,0,0,0.95), 0 0 120px rgba(0,0,0,0.8)',
             }}
           >
-            <em className="text-gold italic">imposible</em>
+            <span className="sr-only">Mago profesional en Granada y Madrid: </span>
+            <span className="block text-cream mb-4">El&nbsp;arte&nbsp;de&nbsp;lo</span>
+            <em className="block text-gold italic">imposible</em>
           </h1>
           <div className="mx-auto my-10" style={{ height: '1px', width: '80px', background: 'oklch(76% 0.18 72 / 0.4)' }} />
           <p
